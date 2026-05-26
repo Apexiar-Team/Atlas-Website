@@ -1,0 +1,10 @@
+{
+  "name": "apexiar-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local development server for the Apexiar static website.",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  }
+}
