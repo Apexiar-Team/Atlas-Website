@@ -8,45 +8,106 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNav = document.getElementById('mobileNav');
 
   if (hamburger && mobileNav) {
+    let lastFocusedElement = null;
+
+    const getFocusableNavElements = () => Array.from(
+      mobileNav.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    );
+
+    const openMobileNav = () => {
+      lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      hamburger.classList.add('active');
+      mobileNav.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      const [firstFocusableElement] = getFocusableNavElements();
+      if (firstFocusableElement) {
+        firstFocusableElement.focus();
+      }
+    };
+
+    const closeMobileNav = () => {
+      hamburger.classList.remove('active');
+      mobileNav.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
+      }
+    };
+
     hamburger.addEventListener('click', () => {
-      const isActive = hamburger.classList.toggle('active');
-      mobileNav.classList.toggle('active');
-      hamburger.setAttribute('aria-expanded', isActive);
-      mobileNav.setAttribute('aria-hidden', !isActive);
-      document.body.style.overflow = isActive ? 'hidden' : '';
+      if (hamburger.classList.contains('active')) {
+        closeMobileNav();
+        return;
+      }
+
+      openMobileNav();
     });
 
     // Close mobile nav when a link is clicked
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileNav.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        mobileNav.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
+        closeMobileNav();
       });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!hamburger.classList.contains('active')) {
+        return;
+      }
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMobileNav();
+        return;
+      }
+
+      if (event.key !== 'Tab') {
+        return;
+      }
+
+      const focusableElements = getFocusableNavElements();
+      if (focusableElements.length === 0) {
+        return;
+      }
+
+      const firstFocusableElement = focusableElements[0];
+      const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstFocusableElement) {
+        event.preventDefault();
+        lastFocusableElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastFocusableElement) {
+        event.preventDefault();
+        firstFocusableElement.focus();
+      }
     });
   }
 
   // --- Navbar background on scroll ---
   const navbar = document.querySelector('.navbar');
-  let lastScroll = 0;
 
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
 
-    if (scrollY > 50) {
-      navbar.style.background = 'rgba(10,10,15,0.85)';
-      navbar.style.backdropFilter = 'blur(12px)';
-      navbar.style.webkitBackdropFilter = 'blur(12px)';
-    } else {
-      navbar.style.background = 'transparent';
-      navbar.style.backdropFilter = 'none';
-      navbar.style.webkitBackdropFilter = 'none';
-    }
-
-    lastScroll = scrollY;
-  }, { passive: true });
+      if (scrollY > 50) {
+        navbar.style.background = 'rgba(10,10,15,0.85)';
+        navbar.style.backdropFilter = 'blur(12px)';
+        navbar.style.webkitBackdropFilter = 'blur(12px)';
+      } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.webkitBackdropFilter = 'none';
+      }
+    }, { passive: true });
+  }
 
   // --- Scroll-triggered fade-in animations ---
   const animateElements = () => {
@@ -125,6 +186,59 @@ document.addEventListener('DOMContentLoaded', () => {
     stat.style.transitionDelay = `${i * 0.1}s`;
   });
 
+  // --- About stats counter animation ---
+  const aboutStatsSection = document.querySelector('.about__stats');
+  const counterElements = aboutStatsSection
+    ? Array.from(aboutStatsSection.querySelectorAll('[data-counter-end]'))
+    : [];
+
+  if (aboutStatsSection && counterElements.length > 0) {
+    let countersStarted = false;
+
+    const runCounters = () => {
+      const counterDurationMs = 1800;
+      const counterTargets = counterElements.map((element) => ({
+        element,
+        endValue: Number(element.dataset.counterEnd || '0'),
+        suffix: element.dataset.counterSuffix || ''
+      }));
+      const startTime = performance.now();
+
+      const updateCounters = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / counterDurationMs, 1);
+        const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+        counterTargets.forEach(({ element, endValue, suffix }) => {
+          const currentValue = Math.round(endValue * easedProgress);
+          element.textContent = `${currentValue}${suffix}`;
+        });
+
+        if (progress < 1) {
+          window.requestAnimationFrame(updateCounters);
+        }
+      };
+
+      window.requestAnimationFrame(updateCounters);
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || countersStarted) {
+          return;
+        }
+
+        countersStarted = true;
+        runCounters();
+        counterObserver.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.3
+    });
+
+    counterObserver.observe(aboutStatsSection);
+  }
+
   // --- Smooth scroll for anchor links (fallback) ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
@@ -174,9 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 15;
-      heroGlow.style.transform = `translateX(calc(-50% + ${x}px)) translateY(${y}px)`;
+      heroGlow.style.setProperty('--hero-glow-offset-x', `${x}px`);
+      heroGlow.style.setProperty('--hero-glow-offset-y', `${y}px`);
       if (heroVortex) {
-        heroVortex.style.transform = `translateX(calc(-50% + ${x * 0.5}px))`;
+        heroVortex.style.setProperty('--hero-vortex-offset-x', `${x * 0.5}px`);
       }
     }, { passive: true });
   }
@@ -267,7 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
     burstDelay: 60,
     sizeRange: [1.5, 4],
     durationRange: [5, 7],
-    bottomRange: [0, 50]
+    bottomRange: [0, 50],
+    colors: ['#f6feff', '#b9f3ff', '#63ddff', '#2cb9ff', '#245bff']
   });
 
   // --- Bento Showcase Particles ---

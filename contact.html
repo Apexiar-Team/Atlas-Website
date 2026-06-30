@@ -137,7 +137,7 @@
           Send Message <span class="btn__arrow">&rarr;</span>
         </button>
 
-        <div class="contact-form__status" id="formStatus"></div>
+        <div class="contact-form__status" id="formStatus" role="status" aria-live="polite"></div>
       </form>
 
       <!-- CONTACT INFO SIDEBAR -->
@@ -226,20 +226,60 @@
     // Form submission with Web3Forms
     const form = document.getElementById('contactForm');
     const statusEl = document.getElementById('formStatus');
-    if (form) {
+    const submitButton = form ? form.querySelector('.contact-form__submit') : null;
+    const defaultSubmitLabel = submitButton ? submitButton.innerHTML : '';
+    const requestTimeoutMs = 10000;
+    let isSubmitting = false;
+
+    const setSubmittingState = (pending) => {
+      isSubmitting = pending;
+      if (submitButton) {
+        submitButton.disabled = pending;
+        submitButton.setAttribute('aria-disabled', String(pending));
+        submitButton.innerHTML = pending ? 'Sending...' : defaultSubmitLabel;
+      }
+
+      if (form) {
+        form.setAttribute('aria-busy', String(pending));
+      }
+    };
+
+    if (form && statusEl) {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        if (isSubmitting || !form.reportValidity()) {
+          return;
+        }
+
+        if (messageEl && !messageEl.value.trim()) {
+          statusEl.className = 'contact-form__status contact-form__status--error';
+          statusEl.textContent = 'Please enter a message before sending.';
+          messageEl.focus();
+          return;
+        }
+
         statusEl.className = 'contact-form__status';
         statusEl.textContent = 'Sending...';
+        setSubmittingState(true);
+
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), requestTimeoutMs);
 
         try {
+          const formData = new FormData(form);
+          if (messageEl) {
+            formData.set('message', messageEl.value.trim());
+          }
+
           const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(new FormData(form)))
+            body: JSON.stringify(Object.fromEntries(formData)),
+            signal: controller.signal
           });
           const data = await res.json();
-          if (data.success) {
+          if (res.ok && data.success) {
             statusEl.className = 'contact-form__status contact-form__status--success';
             statusEl.textContent = 'Message sent successfully! We\'ll be in touch shortly.';
             form.reset();
@@ -248,8 +288,14 @@
             throw new Error(data.message || 'Something went wrong');
           }
         } catch (err) {
+          console.error('Contact form submission failed:', err);
           statusEl.className = 'contact-form__status contact-form__status--error';
-          statusEl.textContent = 'Failed to send. Please email us directly at info@apexiar.co.uk';
+          statusEl.textContent = err.name === 'AbortError'
+            ? 'Sending timed out. Please try again or email us directly at info@apexiar.co.uk'
+            : 'Failed to send. Please email us directly at info@apexiar.co.uk';
+        } finally {
+          window.clearTimeout(timeoutId);
+          setSubmittingState(false);
         }
       });
     }
