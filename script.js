@@ -121,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
       '.bento__card',
       '.ecosystem__card',
       '.about__stat',
-      '.showcase-bento__card'
+      '.showcase-bento__card',
+      '.expertise__item'
     ];
 
     selectors.forEach(selector => {
@@ -186,6 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
     stat.style.transitionDelay = `${i * 0.1}s`;
   });
 
+  // --- Stagger animation for expertise pillars ---
+  const expertiseItems = document.querySelectorAll('.expertise__item');
+  expertiseItems.forEach((item, i) => {
+    item.style.transitionDelay = `${i * 0.08}s`;
+  });
+
   // --- About stats counter animation ---
   const aboutStatsSection = document.querySelector('.about__stats');
   const counterElements = aboutStatsSection
@@ -238,6 +245,114 @@ document.addEventListener('DOMContentLoaded', () => {
 
     counterObserver.observe(aboutStatsSection);
   }
+
+  // --- Globe constellation dots ---
+  (function initGlobeDots() {
+    const globe = document.querySelector('.expertise__globe');
+    const canvas = document.querySelector('.expertise__globe-dots');
+    if (!globe || !canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animId = null;
+
+    function buildParticles(W, H) {
+      const cx = W / 2, cy = H / 2;
+      const rx = W / 2, ry = H / 2;
+      particles = [];
+      // Dot count scales with globe width; cap for performance
+      const count = Math.min(90, Math.floor(W / 18));
+      for (let i = 0; i < count; i++) {
+        // Distribute across top 55% of ellipse arc (-π → 0 = full top half)
+        const angle = -Math.PI + Math.random() * Math.PI;
+        // Depth from rim inward: 0 = on the rim, 1 = at center
+        const depth = 0.08 + Math.random() * 0.55;
+        const x = cx + rx * Math.cos(angle) * (1 - depth);
+        const y = cy + ry * Math.sin(angle) * (1 - depth);
+        particles.push({
+          x, y,
+          r: 0.7 + Math.random() * 1.8,
+          baseAlpha: 0.2 + Math.random() * 0.7,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.25 + Math.random() * 0.65,
+          bright: Math.random() > 0.78  // ~22% are brighter anchor dots
+        });
+      }
+    }
+
+    function resize() {
+      const W = globe.offsetWidth;
+      const H = globe.offsetHeight;
+      canvas.width  = W;
+      canvas.height = H;
+      buildParticles(W, H);
+    }
+
+    let t = 0;
+    function draw() {
+      const W = canvas.width, H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+      t += 0.007;
+
+      // Blue constellation lines between nearby gold dots
+      ctx.lineWidth = 0.85;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 105) {
+            ctx.strokeStyle = `rgba(49,200,255,${((1 - dist / 105) * 0.2).toFixed(3)})`;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw dots
+      for (const p of particles) {
+        const alpha = p.baseAlpha * (0.45 + 0.55 * Math.sin(t * p.speed + p.phase));
+        const r = p.r;
+
+        if (p.bright) {
+          // Soft gold outer glow for accent dots
+          const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3.5);
+          grd.addColorStop(0, `rgba(232,160,32,${(alpha * 0.58).toFixed(3)})`);
+          grd.addColorStop(1, 'rgba(232,160,32,0)');
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, r * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.bright ? '255,205,90' : '232,160,32'},${alpha.toFixed(3)})`;
+        ctx.fill();
+      }
+
+      animId = requestAnimationFrame(draw);
+    }
+
+    function stop()  { if (animId) { cancelAnimationFrame(animId); animId = null; } }
+    function start() { if (!animId) draw(); }
+
+    // Pause animation when the section scrolls off-screen
+    const sectionObs = new IntersectionObserver(
+      entries => entries.forEach(e => e.isIntersecting ? start() : stop()),
+      { threshold: 0 }
+    );
+    sectionObs.observe(globe);
+
+    // Re-build when globe resizes (responsive)
+    const ro = new ResizeObserver(resize);
+    ro.observe(globe);
+
+    resize();
+    start();
+  })();
 
   // --- Smooth scroll for anchor links (fallback) ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
