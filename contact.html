@@ -272,10 +272,13 @@
             formData.set('message', messageEl.value.trim());
           }
 
+          const payload = Object.fromEntries(formData);
+          payload.botcheck = false; // explicitly mark as not a bot for JSON submissions
+
           const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(Object.fromEntries(formData)),
+            body: JSON.stringify(payload),
             signal: controller.signal
           });
           const data = await res.json();
