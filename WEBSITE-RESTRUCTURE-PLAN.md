@@ -5,9 +5,9 @@ Last updated: 20 September 2026.
 ## Current position
 
 - Current phase: Phase 6 navigation, metadata and automated QA implemented; browser/device QA and release items remain open. All three sector pages accepted for progression. Phases 2, 3a-3d and the Phase 4 homepage are accepted for progression; agent browser/device QA remains outstanding.
-- Next action: Commit and push the user-approved release to main, then verify the production domain. User explicitly authorised launch; remaining QA follow-ups stay documented.
+- Next action: Verify/trigger the hosting production deployment for main commit 4c1543f. GitHub push succeeded, but the domain still serves the previous site and the new aerial route returns 404. No deployment/check run was reported by the public GitHub API.
 - Homepage status: video now directly follows the sector strip, before capability tiles; rebuilt around four capabilities and the supplied reference; all explicitly protected sections retained intact. Existing capability/product pages, shared scripts/styles and original assets unchanged.
-- Branch: `website-restructure`.
+- Branch: `main` (release fast-forwarded from `website-restructure`).
 - Original site commit: `ff480f3`.
 - Deliberate baseline commit: `f1e4fe6` (existing website plus the supplied `AGENTS.md`).
 - This control document and its reference in `AGENTS.md` are subsequent planning changes, not part of that baseline.
@@ -660,3 +660,9 @@ Original Phase 2 task (implemented; visual QA still pending):
 - Release checks: 13 Node tests passed; 1,999 local links/assets/fragments across 30 pages passed; root/inline JavaScript and JSON-LD parsed; Git whitespace passed. No build or lint scripts are configured for this static site. Existing documented physical-device, accessibility and consent follow-ups remain open, not represented as passed.
 - Scope: capability and sector pages, homepage/media enhancements, software-content migration, shared navigation/consent, retained product routes/assets, tests and project records. No new framework or production dependency.
 - Fetched origin/main; approved branch descends from it with no remote divergence. Preparing a normal fast-forward main push; production verification follows the push.
+
+### Release push and production handover
+
+- Committed the approved site as 4c1543f38cfaa623d659863ba1cd2dc88868ab89 and fast-forwarded/pushed origin/main successfully. No force push. Local main and origin/main matched; working tree was clean.
+- HTTPS verification after push: www.apexiar.co.uk returned 200 with the old homepage; aerial-intelligence.html returned 404. Public GitHub commit status was pending with no check runs, deployments or Actions runs reported. This does not establish a hosting failure, but the new site is not yet verified live.
+- Repository includes vercel.json, but no authenticated hosting CLI/session or deployment credentials are available here; GitHub CLI is not authenticated. Next step: inspect the hosting project connected to Apexiar-Team/Atlas-Website, confirm production branch main and deploy commit 4c1543f. Existing domain/DNS configuration was not changed.

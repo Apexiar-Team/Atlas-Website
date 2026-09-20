@@ -1,6 +1,6 @@
 # Apexiar restructure: QA and content disposition
 
-20 September 2026. User approved the current site and explicitly authorised commit/push to main for production. Release checks passed; publication is in progress. Remaining device/accessibility/consent follow-ups are documented below.
+20 September 2026. User approved the current site and explicitly authorised commit/push to main for production. Release checks passed; site commit 4c1543f is pushed to main. Production activation is not yet confirmed. Remaining device/accessibility/consent follow-ups are documented below.
 
 ## Changed in Phase 6
 
@@ -253,3 +253,9 @@ All 30 page headers now offer direct capability dropdowns on desktop and mobile.
 - Release checks: 13 Node tests passed; 1,999 local links/assets/fragments across 30 pages passed; root/inline JavaScript and JSON-LD parsed; Git whitespace passed. No build or lint scripts are configured for this static site. Existing documented physical-device, accessibility and consent follow-ups remain open, not represented as passed.
 - Scope: capability and sector pages, homepage/media enhancements, software-content migration, shared navigation/consent, retained product routes/assets, tests and project records. No new framework or production dependency.
 - Fetched origin/main; approved branch descends from it with no remote divergence. Preparing a normal fast-forward main push; production verification follows the push.
+
+### Release push and production handover
+
+- Committed the approved site as 4c1543f38cfaa623d659863ba1cd2dc88868ab89 and fast-forwarded/pushed origin/main successfully. No force push. Local main and origin/main matched; working tree was clean.
+- HTTPS verification after push: www.apexiar.co.uk returned 200 with the old homepage; aerial-intelligence.html returned 404. Public GitHub commit status was pending with no check runs, deployments or Actions runs reported. This does not establish a hosting failure, but the new site is not yet verified live.
+- Repository includes vercel.json, but no authenticated hosting CLI/session or deployment credentials are available here; GitHub CLI is not authenticated. Next step: inspect the hosting project connected to Apexiar-Team/Atlas-Website, confirm production branch main and deploy commit 4c1543f. Existing domain/DNS configuration was not changed.
