@@ -1,0 +1,140 @@
+/* Page-specific additions; existing pages continue using styles.css alone. */
+.software-page .software-hero {
+  padding: 160px 0 64px;
+  min-height: 0;
+}
+
+.software-page .software-hero .hero__title {
+  max-width: 1100px;
+  margin-inline: auto;
+  font-size: clamp(2rem, 4.8vw, 4.3rem);
+  text-wrap: balance;
+}
+
+.software-hero__accent {
+  color: var(--accent-light);
+}
+
+.software-eyebrow {
+  margin-bottom: 16px;
+  color: var(--accent-light);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.software-page .hero__subtitle {
+  max-width: 850px;
+}
+
+.software-intro {
+  padding: 64px 0 80px;
+  border-top: 1px solid var(--border);
+}
+
+.software-intro__grid {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+.software-intro .section-title,
+.software-intro .section-subtitle {
+  text-align: left;
+  margin-left: 0;
+}
+
+.software-intro .section-subtitle {
+  margin-bottom: 24px;
+}
+
+.software-section-heading {
+  position: relative;
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.software-page [id] {
+  scroll-margin-top: 100px;
+}
+
+.software-page .showcase-bento__grid > a:focus-visible,
+.software-page .ecosystem__grid > a:focus-visible {
+  outline: 2px solid var(--accent-light);
+  outline-offset: 4px;
+}
+
+@media (min-width: 900px) {
+  .software-intro__grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 639px) {
+  .software-page .container {
+    padding-inline: 20px;
+  }
+
+  .software-page .software-hero {
+    padding-top: 120px;
+  }
+
+  .software-page .hero__tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  .software-page .showcase-bento__card {
+    min-height: 260px;
+  }
+
+  .software-intro .btn {
+    white-space: normal;
+  }
+}
+
+/* Keep content readable without decorative movement in reduced-motion mode. */
+@media (prefers-reduced-motion: reduce) {
+  html:has(.software-page) {
+    scroll-behavior: auto;
+  }
+
+  .software-page *,
+  .software-page *::before,
+  .software-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .software-page .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .software-page .hero__particles,
+  .software-page .showcase-bento__particles,
+  .software-page .expertise__globe-dots,
+  .software-page .video-reel__bg {
+    display: none;
+  }
+
+  .software-page .video-reel {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding-block: 64px;
+  }
+
+  .software-page .video-reel__content {
+    display: grid;
+    gap: 32px;
+  }
+
+  .software-page .video-reel__slide {
+    position: static;
+    opacity: 1;
+    transform: none;
+  }
+}

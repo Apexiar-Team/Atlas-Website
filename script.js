@@ -3,6 +3,7 @@
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   // --- Mobile Navigation Toggle ---
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
@@ -11,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastFocusedElement = null;
 
     const getFocusableNavElements = () => Array.from(
-      mobileNav.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
-    );
+      mobileNav.querySelectorAll('summary, a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    ).filter(element => element.getClientRects().length > 0);
 
     const openMobileNav = () => {
       lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -48,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       openMobileNav();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1100 && hamburger.classList.contains('active')) closeMobileNav();
     });
 
     // Close mobile nav when a link is clicked
@@ -90,6 +95,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Native capability disclosures (keyboard, touch and pointer) ---
+  const capabilityMenus = document.querySelectorAll('.capability-nav');
+  const closeCapabilityMenus = () => capabilityMenus.forEach(menu => { menu.open = false; });
+  capabilityMenus.forEach(menu => {
+    menu.addEventListener('pointerleave', event => {
+      if (event.pointerType !== 'mouse' || !menu.closest('.navbar__links')) return;
+      const focused = document.activeElement;
+      if (menu.contains(focused) && focused.matches(':focus-visible')) return;
+      menu.open = false;
+    });
+    menu.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.open) {
+        event.preventDefault();
+        event.stopPropagation();
+        menu.open = false;
+        menu.querySelector('summary').focus();
+      }
+    });
+    menu.addEventListener('focusout', event => {
+      if (!menu.contains(event.relatedTarget)) menu.open = false;
+    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeCapabilityMenus));
+  });
+  document.addEventListener('click', event => {
+    capabilityMenus.forEach(menu => { if (!menu.contains(event.target)) menu.open = false; });
+  });
+  window.addEventListener('resize', closeCapabilityMenus);
+
   // --- Navbar background on scroll ---
   const navbar = document.querySelector('.navbar');
 
@@ -110,7 +143,48 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // --- Scroll-triggered fade-in animations ---
+  // Homepage reveals are progressive enhancement: content is visible by default.
+  const animateHomepage = () => {
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (motion.matches || !('IntersectionObserver' in window)) return;
+    const groups = [
+      '.home-section-heading', '.home-capability-grid > a',
+      '.home-operating .home-eyebrow', '.home-operating h2', '.home-flow > li',
+      '.home-assurance .hero__trust-strip', '.about .section-title',
+      '.about .section-subtitle', '.about__stats > div',
+      '.home-sector-section .home-eyebrow', '.home-sector-section h2',
+      '.home-sector-grid > article', '.home-technology-grid > a', '.home-portfolio-note',
+      '.testimonial-break__quote-wrap', '.testimonial-break__attribution',
+      '#why-apexiar .home-eyebrow', '#why-apexiar h2', '.home-delivery > li',
+      '#why-apexiar > .container > .home-text-link', '.cta-section__inner'
+    ];
+    const targets = [...document.querySelectorAll(groups.join(','))];
+    const reveal = element => {
+      element.classList.remove('home-reveal-pending');
+      observer.unobserve(element);
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) reveal(entry.target); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
+    targets.forEach(element => {
+      const siblings = [...element.parentElement.children];
+      const isCard = element.matches('.home-capability, .home-flow > li, .about__stat, .home-sector-grid > article, .home-technology-grid > a, .home-delivery > li');
+      element.style.setProperty('--home-reveal-delay', isCard ? Math.min(siblings.indexOf(element), 3) * 75 + 'ms' : '0ms');
+      element.classList.add('home-reveal');
+      // Avoid hiding content already visible after refresh or anchor navigation.
+      if (element.getBoundingClientRect().top >= window.innerHeight && !element.contains(document.activeElement)) {
+        observer.observe(element);
+        element.classList.add('home-reveal-pending');
+      }
+      element.addEventListener('focusin', () => reveal(element));
+    });
+    motion.addEventListener('change', event => {
+      if (event.matches) { targets.forEach(reveal); observer.disconnect(); }
+    });
+  };
+
   const animateElements = () => {
+    if (document.body.classList.contains('home-page')) { animateHomepage(); return; }
     // Select elements to animate
     const selectors = [
       '.feature-card',
@@ -250,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
   (function initGlobeDots() {
     const globe = document.querySelector('.expertise__globe');
     const canvas = document.querySelector('.expertise__globe-dots');
-    if (!globe || !canvas) return;
+    if (!globe || !canvas || reducedMotion) return;
 
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -360,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(anchor.getAttribute('href'));
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
       }
     });
   });
@@ -370,6 +444,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const reelSlides = document.querySelectorAll('.video-reel__slide');
 
   if (reelVideo && reelSlides.length > 0) {
+    const playbackButton = document.createElement('button');
+    playbackButton.type = 'button';
+    playbackButton.className = 'video-reel__playback';
+    const updatePlaybackButton = () => {
+      playbackButton.textContent = reelVideo.paused ? 'Play video' : 'Pause video';
+      if (reelVideo.paused && !Array.from(reelSlides).some(slide => slide.classList.contains('video-reel__slide--active'))) {
+        reelSlides[0].classList.add('video-reel__slide--active');
+      }
+    };
+    playbackButton.addEventListener('click', () => {
+      if (reelVideo.paused) reelVideo.play().catch(updatePlaybackButton);
+      else reelVideo.pause();
+    });
+    reelVideo.addEventListener('play', updatePlaybackButton);
+    reelVideo.addEventListener('pause', updatePlaybackButton);
+    reelVideo.parentElement.appendChild(playbackButton);
+    if (reducedMotion) {
+      reelVideo.autoplay = false;
+      reelVideo.pause();
+    }
+    updatePlaybackButton();
+
     // [start, end] in seconds for each slide
     const slideRanges = [[0.5, 5], [6, 11.5], [12, 17.5]];
     let currentSlide = -1;
@@ -399,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroGlow = document.querySelector('.hero__glow');
   const heroVortex = document.querySelector('.hero__vortex');
 
-  if (heroGlow && window.innerWidth > 768) {
+  if (heroGlow && window.innerWidth > 768 && !reducedMotion) {
     window.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 20;
       const y = (e.clientY / window.innerHeight - 0.5) * 15;
@@ -413,7 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Reusable Particle System ---
   const createParticleSystem = (container, options = {}) => {
-    if (!container) return;
+    if (!container || reducedMotion) return;
 
     const {
       maxParticles = 60,

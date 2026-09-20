@@ -1,0 +1,51 @@
+/* Rail sector additions using the existing Apexiar design system. */
+.rail-page .rail-hero { min-height: 0; padding: 160px 0 80px; }
+.rail-hero__layout { position: relative; z-index: 1; display: grid; gap: 48px; align-items: center; }
+.rail-hero h1 { color: var(--text-heading); font-size: clamp(2.2rem, 4.5vw, 4.3rem); line-height: 1.1; letter-spacing: -.035em; margin-bottom: 24px; }
+.rail-hero h1 span { color: var(--accent-light); }
+.rail-eyebrow { color: var(--accent-light); font-size: .72rem; font-weight: 700; line-height: 1.6; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 16px; }
+.rail-lead { color: var(--text); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.8; margin-bottom: 24px; }
+.rail-detail { color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
+.rail-page .hero__cta-group { justify-content: flex-start; }
+.rail-section { padding: 80px 0; }
+.rail-section--tinted { background: linear-gradient(120deg, #06101e, var(--bg)); border-block: 1px solid var(--border); }
+.rail-page .section-title, .rail-page .section-subtitle { text-align: left; margin-left: 0; }
+.rail-visual { margin: 0; min-width: 0; overflow: hidden; border: 1px solid rgba(99,221,255,.22); border-radius: var(--radius-lg); background: var(--bg-card); }
+.rail-visual img, .rail-card > img { display: block; width: 100%; height: auto; }
+.rail-visual figcaption { padding: 14px 20px; color: var(--text-muted); font-size: .78rem; line-height: 1.6; border-top: 1px solid var(--border); }
+.rail-challenges, .rail-sensors { display: grid; gap: 24px; margin-top: 36px; }
+.rail-challenges article { border-top: 1px solid rgba(99,221,255,.35); padding-top: 24px; }
+.rail-number { color: var(--hero-neon-mid); font-size: .75rem; letter-spacing: .1em; }
+.rail-challenges h3, .rail-card h3 { color: var(--text-heading); font-size: 1.3rem; line-height: 1.4; margin: 14px 0; }
+.rail-challenges p, .rail-card p { color: var(--text-muted); line-height: 1.8; }
+.rail-feature { display: grid; gap: 40px; align-items: center; }
+.rail-links { display: grid; gap: 16px; }
+.rail-links a, .rail-link, .rail-card a { color: var(--accent-light); line-height: 1.7; }
+.rail-links a { padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.rail-links a:hover, .rail-link:hover, .rail-card a:hover { text-decoration: underline; }
+.rail-card { overflow: hidden; border: 1px solid rgba(184,134,11,.3); border-radius: var(--radius-lg); background: var(--bg-card); }
+.rail-card__body { padding: 28px; }
+.rail-card .rail-status { color: var(--accent-light); text-transform: uppercase; font-size: .72rem; font-weight: 700; letter-spacing: .07em; }
+.rail-card .rail-note { margin: 20px 0; padding-left: 16px; border-left: 2px solid var(--accent-light); font-size: .85rem; }
+.rail-page [id] { scroll-margin-top: 100px; }
+.rail-page a:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 4px; }
+@media (min-width: 768px) {
+  .rail-challenges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .rail-sensors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .rail-hero__layout, .rail-feature { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .rail-page .container { padding-inline: 20px; }
+  .rail-page .rail-hero { padding: 120px 0 56px; }
+  .rail-section { padding: 56px 0; }
+  .rail-card__body { padding: 22px; }
+  .rail-page .btn { white-space: normal; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.rail-page) { scroll-behavior: auto; }
+  .rail-page *, .rail-page *::before, .rail-page *::after { animation: none !important; transition: none !important; }
+  .rail-page .hero__particles { display: none; }
+  .rail-page .fade-in { opacity: 1; transform: none; }
+}

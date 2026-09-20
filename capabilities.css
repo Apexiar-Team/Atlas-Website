@@ -1,0 +1,56 @@
+/* Capability overview; scoped additions to the existing design system. */
+.capabilities-page .capabilities-hero { min-height: 0; padding: 160px 0 72px; }
+.capabilities-hero__content { position: relative; z-index: 1; }
+.capabilities-hero h1 { color: var(--text-heading); font-size: clamp(2.4rem, 5.5vw, 5rem); line-height: 1.08; letter-spacing: -0.04em; margin-bottom: 26px; }
+.capabilities-hero h1 span { color: var(--accent-light); }
+.capabilities-eyebrow { color: var(--accent-light); text-transform: uppercase; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; line-height: 1.6; margin-bottom: 16px; }
+.capabilities-lead { max-width: 790px; font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.8; margin-bottom: 30px; }
+.capabilities-page .hero__cta-group { justify-content: flex-start; }
+.capabilities-sectors { display: flex; flex-wrap: wrap; gap: 12px 20px; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 0.8rem; letter-spacing: 0.06em; color: var(--text-muted); }
+.capabilities-sectors span { color: var(--accent-light); }
+.capabilities-section { padding: 80px 0; }
+.capabilities-section--tinted { background: linear-gradient(120deg, #06101e, var(--bg)); border-block: 1px solid var(--border); }
+.capabilities-page .section-title, .capabilities-page .section-subtitle { text-align: left; margin-left: 0; }
+.capabilities-grid { display: grid; gap: 26px; margin-top: 40px; }
+.capability-card { min-width: 0; border: 1px solid rgba(99, 221, 255, 0.22); border-radius: var(--radius-lg); background: var(--bg-card); }
+.capability-card__link { display: flex; flex-direction: column; height: 100%; border-radius: inherit; overflow: hidden; }
+.capability-card__image { aspect-ratio: 16 / 9; overflow: hidden; background: #06101e; border-bottom: 1px solid var(--border); }
+.capability-card__image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.capability-card__body { padding: 28px; flex: 1; display: flex; flex-direction: column; align-items: flex-start; }
+.capability-number { color: var(--hero-neon-mid); font-size: 0.75rem; letter-spacing: 0.1em; }
+.capability-card h3 { color: var(--text-heading); font-size: clamp(1.3rem, 2vw, 1.7rem); line-height: 1.3; margin: 14px 0; }
+.capability-card p, .capabilities-flow p { color: var(--text-muted); line-height: 1.8; }
+.capability-card__cta { color: var(--accent-light); padding-top: 24px; margin-top: auto; line-height: 1.6; }
+.capability-card__link:hover { background: var(--bg-elevated); }
+.capability-card__link:hover .capability-card__cta { text-decoration: underline; }
+.capabilities-flow { display: grid; gap: 28px; list-style: none; padding: 0; margin-top: 40px; }
+.capabilities-flow li { border-top: 2px solid rgba(99, 221, 255, 0.5); padding-top: 24px; }
+.capabilities-flow h3 { font-size: 1.4rem; color: var(--text-heading); margin: 12px 0; }
+.capabilities-flow a { display: inline-block; color: var(--accent-light); margin-top: 20px; line-height: 1.6; }
+.capabilities-flow a:hover { text-decoration: underline; }
+.capabilities-portfolio { display: grid; gap: 32px; align-items: center; }
+.capabilities-links { display: grid; gap: 16px; }
+.capabilities-links a { display: flex; justify-content: space-between; gap: 20px; padding: 24px; border: 1px solid rgba(184, 134, 11, 0.35); border-radius: var(--radius); color: var(--accent-light); }
+.capabilities-links a:hover { background: var(--bg-elevated); }
+.capabilities-page [id] { scroll-margin-top: 100px; }
+.capabilities-page a:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 4px; }
+@media (min-width: 768px) {
+  .capabilities-grid, .capabilities-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .capabilities-flow { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .capabilities-portfolio { grid-template-columns: 1.2fr 1fr; gap: 64px; }
+}
+@media (max-width: 639px) {
+  .capabilities-page .container { padding-inline: 20px; }
+  .capabilities-page .capabilities-hero { padding: 120px 0 56px; }
+  .capabilities-section { padding: 56px 0; }
+  .capability-card__body { padding: 22px; }
+  .capabilities-page .btn { white-space: normal; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.capabilities-page) { scroll-behavior: auto; }
+  .capabilities-page *, .capabilities-page *::before, .capabilities-page *::after { animation: none !important; transition: none !important; }
+  .capabilities-page .hero__particles { display: none; }
+  .capabilities-page .fade-in { opacity: 1; transform: none; }
+}

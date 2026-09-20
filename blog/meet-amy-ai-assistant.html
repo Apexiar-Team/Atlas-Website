@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-M398J42C"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'GT-M398J42C');
-  </script>
+  <script src="../consent.js" defer></script>
+  <link rel="stylesheet" href="../consent.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meet Amy: Apexiar's First AI Assistant — Apexiar Blog</title>
@@ -35,6 +28,7 @@
   <link rel="apple-touch-icon" href="../assets/Apexiar.webp">
 
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../site-navigation.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -72,17 +66,23 @@
         <img src="../assets/Apexiar.webp" alt="Apexiar" class="navbar__logo-img">
       </a>
 
-      <nav class="navbar__links" id="navLinks">
-        <a href="../index.html">Home</a>
-        <a href="../index.html#products">Products</a>
-        <a href="../services.html">Services</a>
-        <a href="../blog.html">Blog</a>
-        <a href="../contact.html">Contact</a>
+      <nav class="navbar__links" id="navLinks" aria-label="Main navigation">
+        <details class="capability-nav"><summary>Capabilities</summary><div class="capability-nav__panel">
+          <a href="../capabilities.html">All capabilities</a>
+          <a href="../software-intelligence.html">Advanced software solutions</a>
+          <a href="../connected-systems.html">Connected systems &amp; sensing</a>
+          <a href="../aerial-intelligence.html">Aerial reconnaissance &amp; inspection</a>
+          <a href="../advisory-deployment.html">Engineering &amp; deployment</a>
+        </div></details>
+        <a href="../index.html#sectors">Sectors</a>
+        <a href="../software-intelligence.html">Software</a>
+        <a href="../blog.html">Insights</a>
+        <a href="../index.html#about">Company</a>
       </nav>
 
       <div class="navbar__actions">
         <a href="https://www.linkedin.com/company/110718248/" target="_blank" rel="noopener noreferrer" class="navbar__social-link"><img src="../assets/LinkedIn.webp" alt="LinkedIn" class="navbar__social-icon"></a>
-        <a href="../contact.html" class="btn btn--primary btn--sm">Get Started</a>
+        <a href="../contact.html" class="btn btn--primary btn--sm">Discuss a requirement</a>
       </div>
 
       <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
@@ -93,15 +93,19 @@
 
   <!-- ===== MOBILE NAV OVERLAY ===== -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
-    <nav class="mobile-nav__links">
-      <a href="../index.html">Home</a>
-      <a href="../index.html#products">Products</a>
-      <a href="../services.html">Services</a>
-      <a href="../blog.html">Blog</a>
-      <a href="../contact.html">Contact</a>
-      <div class="mobile-nav__actions">
-        <a href="../contact.html" class="btn btn--primary">Get Started</a>
-      </div>
+    <nav class="mobile-nav__links" aria-label="Mobile navigation">
+        <details class="capability-nav"><summary>Capabilities</summary><div class="capability-nav__panel">
+          <a href="../capabilities.html">All capabilities</a>
+          <a href="../software-intelligence.html">Advanced software solutions</a>
+          <a href="../connected-systems.html">Connected systems &amp; sensing</a>
+          <a href="../aerial-intelligence.html">Aerial reconnaissance &amp; inspection</a>
+          <a href="../advisory-deployment.html">Engineering &amp; deployment</a>
+        </div></details>
+        <a href="../index.html#sectors">Sectors</a>
+        <a href="../software-intelligence.html">Software</a>
+        <a href="../blog.html">Insights</a>
+        <a href="../index.html#about">Company</a>
+        <div class="mobile-nav__actions"><a href="../contact.html" class="btn btn--primary">Discuss a requirement</a></div>
     </nav>
   </div>
 
@@ -213,44 +217,42 @@
   </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <div class="navbar__logo">
-          <img src="../assets/Apexiar.webp" alt="Apexiar" class="footer__logo-img">
+  <footer class="footer site-footer" id="contact"><div class="container footer__inner"><div class="footer__brand"><a href="../index.html"><img src="../assets/Apexiar.webp" alt="Apexiar" class="footer__logo-img"></a><p>Applied technology for regulated and safety-critical operations. Software, connected systems, aerial intelligence and engineering support.</p></div><div class="footer__links">
+        <div class="footer__col"><h2 class="footer__heading">Capabilities</h2>
+          <a href="../software-intelligence.html">Software &amp; Intelligence</a>
+          <a href="../connected-systems.html">Connected Systems</a>
+          <a href="../aerial-intelligence.html">Aerial Intelligence</a>
+          <a href="../advisory-deployment.html">Advisory &amp; Deployment</a>
         </div>
-        <p>Enterprise solutions for asset management, site, and operational management. Built for automation, compliance, and security first.</p>
-      </div>
-      <div class="footer__links">
-        <div class="footer__col">
-          <h4>Products</h4>
+        <div class="footer__col"><h2 class="footer__heading">Sectors</h2>
+          <a href="../sectors/rail.html">Rail</a>
+          <a href="../sectors/fire-emergency-response.html">Fire &amp; Emergency Response</a>
+          <a href="../sectors/energy-infrastructure.html">Energy &amp; Infrastructure</a>
+        </div>
+        <div class="footer__col"><h2 class="footer__heading">Software</h2>
+          <a href="../products/atom.html">Atom</a>
           <a href="../products/artemis.html">Artemis</a>
           <a href="../products/atlas.html">Atlas</a>
           <a href="../products/amis.html">AMIS</a>
+          <a href="../contact.html">AMIS Customer</a>
           <a href="../products/axis.html">Axis</a>
           <a href="../products/assure.html">Assure</a>
           <a href="../products/prism.html">Prism</a>
           <a href="../products/aspire.html">Aspire</a>
         </div>
-        <div class="footer__col">
-          <h4>Company</h4>
+        <div class="footer__col"><h2 class="footer__heading">Company</h2>
           <a href="../index.html#about">About</a>
-          <a href="../blog.html">Blog</a>
+          <a href="../blog.html">Insights</a>
           <a href="../services.html">Services</a>
           <a href="../contact.html">Contact</a>
         </div>
-        <div class="footer__col">
-          <h4>Legal</h4>
+        <div class="footer__col"><h2 class="footer__heading">Legal</h2>
           <a href="../privacy.html">Privacy</a>
           <a href="../cookies.html">Cookies</a>
+          <button type="button" data-cookie-settings hidden>Cookie settings</button>
           <a href="../carbon-reduction-plan.html">Carbon Reduction Plan</a>
         </div>
-      </div>
-    </div>
-    <div class="container footer__bottom">
-      <p>&copy; 2026 Apexiar. All rights reserved.</p>
-    </div>
-  </footer>
+      </div></div><div class="container footer__bottom"><p>&copy; 2026 Apexiar. All rights reserved.</p></div></footer>
 
   <script src="../script.js" defer></script>
 </body>

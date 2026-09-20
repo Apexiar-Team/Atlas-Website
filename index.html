@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=GT-M398J42C"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'GT-M398J42C');
-  </script>
+  <script src="consent.js" defer></script>
+  <link rel="stylesheet" href="consent.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apexiar — Enterprise Solutions for Modern Operations</title>
-  <meta name="description" content="Apexiar designs and delivers secure, AI-powered platforms for enterprise asset management. Seven integrated products, one unified ecosystem.">
+  <title>Apexiar | Technology for Critical Operations</title>
+  <meta name="description" content="Applied software, connected sensing, aerial intelligence and engineering for rail, emergency response and critical infrastructure.">
   <meta name="theme-color" content="#0a0a0f">
   <link rel="canonical" href="https://www.apexiar.co.uk/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.apexiar.co.uk/">
-  <meta property="og:title" content="Apexiar — Enterprise Solutions for Modern Operations">
-  <meta property="og:description" content="Secure, AI-powered platforms that redefine asset management. Seven integrated products, one unified ecosystem.">
+  <meta property="og:title" content="Apexiar | Technology for Critical Operations">
+  <meta property="og:description" content="Applied software, connected sensing, aerial intelligence and engineering for rail, emergency response and critical infrastructure.">
   <meta property="og:image" content="https://www.apexiar.co.uk/assets/Apexiar.webp">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Apexiar — Enterprise Solutions for Modern Operations">
-  <meta name="twitter:description" content="Secure, AI-powered platforms that redefine asset management. Seven integrated products, one unified ecosystem.">
+  <meta name="twitter:title" content="Apexiar | Technology for Critical Operations">
+  <meta name="twitter:description" content="Applied software, connected sensing, aerial intelligence and engineering for rail, emergency response and critical infrastructure.">
   <meta name="twitter:image" content="https://www.apexiar.co.uk/assets/Apexiar.webp">
 
   <!-- Favicon -->
@@ -35,6 +28,10 @@
   <link rel="apple-touch-icon" href="assets/Apexiar.webp">
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="site-navigation.css">
+  <link rel="stylesheet" href="homepage.css">
+  <link rel="stylesheet" href="inspection.css?v=digital-callouts">
+  <noscript><style>.home-page .fade-in { opacity: 1; transform: none; }</style></noscript>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -46,14 +43,14 @@
     "name": "Apexiar",
     "url": "https://www.apexiar.co.uk",
     "logo": "https://www.apexiar.co.uk/assets/Apexiar.webp",
-    "description": "Apexiar designs and delivers secure, AI-powered platforms for enterprise asset management, incident management, and operational intelligence.",
+    "description": "Apexiar is an applied technology company for regulated and safety-critical operations, combining software, connected systems, aerial intelligence and engineering support.",
     "sameAs": [
       "https://www.linkedin.com/company/110718248/"
     ]
   }
   </script>
 </head>
-<body>
+<body class="home-page">
   <a href="#main-content" class="skip-nav">Skip to main content</a>
 
   <!-- ===== NAVIGATION ===== -->
@@ -63,17 +60,23 @@
         <img src="assets/Apexiar.webp" alt="Apexiar" class="navbar__logo-img">
       </a>
 
-      <nav class="navbar__links" id="navLinks">
-        <a href="index.html#about">About</a>
-        <a href="index.html#products">Products</a>
-        <a href="services.html">Services</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+      <nav class="navbar__links" id="navLinks" aria-label="Main navigation">
+        <details class="capability-nav"><summary>Capabilities</summary><div class="capability-nav__panel">
+          <a href="capabilities.html">All capabilities</a>
+          <a href="software-intelligence.html">Advanced software solutions</a>
+          <a href="connected-systems.html">Connected systems &amp; sensing</a>
+          <a href="aerial-intelligence.html">Aerial reconnaissance &amp; inspection</a>
+          <a href="advisory-deployment.html">Engineering &amp; deployment</a>
+        </div></details>
+        <a href="index.html#sectors">Sectors</a>
+        <a href="software-intelligence.html">Software</a>
+        <a href="blog.html">Insights</a>
+        <a href="index.html#about">Company</a>
       </nav>
 
       <div class="navbar__actions">
         <a href="https://www.linkedin.com/company/110718248/" target="_blank" rel="noopener noreferrer" class="navbar__social-link"><img src="assets/LinkedIn.webp" alt="LinkedIn" class="navbar__social-icon"></a>
-        <a href="contact.html" class="btn btn--primary btn--sm">Get Started</a>
+        <a href="contact.html" class="btn btn--primary btn--sm">Discuss a requirement</a>
       </div>
 
       <button class="navbar__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileNav">
@@ -84,149 +87,38 @@
 
   <!-- ===== MOBILE NAV OVERLAY ===== -->
   <div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
-    <nav class="mobile-nav__links">
-      <a href="index.html#about">About</a>
-      <a href="index.html#products">Products</a>
-      <a href="services.html">Services</a>
-      <a href="blog.html">Blog</a>
-      <a href="contact.html">Contact</a>
-      <div class="mobile-nav__actions">
-        <a href="contact.html" class="btn btn--primary">Get Started</a>
-      </div>
+    <nav class="mobile-nav__links" aria-label="Mobile navigation">
+        <details class="capability-nav"><summary>Capabilities</summary><div class="capability-nav__panel">
+          <a href="capabilities.html">All capabilities</a>
+          <a href="software-intelligence.html">Advanced software solutions</a>
+          <a href="connected-systems.html">Connected systems &amp; sensing</a>
+          <a href="aerial-intelligence.html">Aerial reconnaissance &amp; inspection</a>
+          <a href="advisory-deployment.html">Engineering &amp; deployment</a>
+        </div></details>
+        <a href="index.html#sectors">Sectors</a>
+        <a href="software-intelligence.html">Software</a>
+        <a href="blog.html">Insights</a>
+        <a href="index.html#about">Company</a>
+        <div class="mobile-nav__actions"><a href="contact.html" class="btn btn--primary">Discuss a requirement</a></div>
     </nav>
   </div>
 
   <main id="main-content">
+    <section class="hero home-hero" aria-labelledby="home-heading">
+      <div class="home-hero__art" aria-hidden="true"></div>
+      <div class="hero__vortex" aria-hidden="true"><div class="hero__vortex-core"></div><div class="hero__vortex-wide"></div><div class="hero__vortex-flare"></div></div>
+      <div class="hero__glow" aria-hidden="true"></div><div class="hero__particles" id="heroParticles" aria-hidden="true"></div>
+      <div class="container home-hero__inner"><div class="home-hero__copy">
+        <p class="home-wordmark">APEXIAR</p>
+        <h1 id="home-heading">Advanced technology for <span>critical operations.</span></h1>
+        <p class="home-lead">Apexiar is an innovative technology company providing advanced software, connected sensing and aerial intelligence for rail, emergency response and critical infrastructure.</p>
+        <div class="hero__cta-group"><a href="capabilities.html" class="btn btn--primary btn--lg">Explore capabilities <span class="btn__arrow">&rarr;</span></a><a href="contact.html" class="btn btn--ghost btn--lg">Discuss a requirement</a></div>
+      </div></div><p class="home-hero__caption">Connected technology illustration</p>
+    </section>
+    <nav class="home-sector-strip" aria-label="Explore our sectors"><div class="container"><a href="sectors/rail.html">Rail</a><a href="sectors/fire-emergency-response.html">Fire &amp; Emergency Response</a><a href="sectors/energy-infrastructure.html">Energy &amp; Infrastructure</a></div></nav>
 
-  <!-- ===== HERO SECTION ===== -->
-  <section class="hero hero--landing">
-    <div class="hero__vortex">
-      <div class="hero__vortex-core"></div>
-      <div class="hero__vortex-wide"></div>
-      <div class="hero__vortex-flare"></div>
-    </div>
-    <div class="hero__glow"></div>
-    <div class="hero__glow-beam"></div>
-    <div class="hero__glow-beam hero__glow-beam--wide"></div>
-    <div class="hero__particles" id="heroParticles"></div>
-    <div class="hero__gradient-overlay"></div>
-    <div class="container hero__inner">
-      <h1 class="hero__title" aria-label="APEXIAR">
-        <span class="hero__title-segment hero__title-segment--inverse" aria-hidden="true">A</span><span class="hero__title-segment" aria-hidden="true">PEX</span><span class="hero__title-segment hero__title-segment--inverse" aria-hidden="true">I</span><span class="hero__title-segment" aria-hidden="true">AR</span>
-      </h1>
-      <p class="hero__tagline">Architects of Intelligent Software Infrastructure</p>
-      <div class="hero__subtitle">
-        <p>Apexiar supports regulated and safety-critical organisations with intelligent software platforms, data analytics, asset management insight and operational consultancy.</p>
-      </div>
-      <div class="hero__cta-group">
-        <a href="#products" class="btn btn--primary btn--lg hero__cta">
-          Explore the Products <span class="btn__arrow">&rarr;</span>
-        </a>
-        <a href="contact.html" class="btn btn--ghost btn--lg">Book a Demo</a>
-      </div>
-      <div class="hero__trust-strip">
-        <span class="hero__trust-label">Certified &amp; Compliant</span>
-        <div class="hero__trust-badges">
-          <img src="assets/cyber-essentials.webp" alt="Cyber Essentials Certified" class="hero__trust-badge">
-          <img src="assets/ICO.webp" alt="ICO Registered" class="hero__trust-badge">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PRODUCT SHOWCASE BENTO ===== -->
-  <section class="showcase-bento">
-    <div class="showcase-bento__particles" id="bentoParticles"></div>
-    <div class="container">
-      <div class="showcase-bento__grid">
-
-        <a href="products/atom.html" class="showcase-bento__card showcase-bento__card--1">
-          <img src="assets/Design/atom-telemetry.jpg" alt="Atom — Vehicle telemetry interface" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Vehicle Telemetry</span>
-            <h3>Atom.</h3>
-            <p>Real-time telemetry to predict issues and prevent failures.</p>
-          </div>
-        </a>
-
-        <a href="products/artemis.html" class="showcase-bento__card showcase-bento__card--2">
-          <img src="assets/Design/artemis1.webp" alt="Artemis — Facility Management" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Asset &amp; Facility Management</span>
-            <h3>Artemis.</h3>
-            <p>Redefining how assets and facilities are managed, through automation.</p>
-          </div>
-        </a>
-
-        <a href="products/axis.html" class="showcase-bento__card showcase-bento__card--3">
-          <img src="assets/Design/Axis1.webp" alt="Axis — AI Fault Finding" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Diagnostics</span>
-            <h3>Axis.</h3>
-            <p>AI fault finding and predictive diagnostics for critical assets.</p>
-          </div>
-        </a>
-
-        <a href="products/amis.html" class="showcase-bento__card showcase-bento__card--4">
-          <img src="assets/Design/audit1.webp" alt="AMIS — Incident Reporting" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Incident Intelligence</span>
-            <h3>AMIS.</h3>
-            <p>Incident intelligence, trend analysis, and executive reporting.</p>
-          </div>
-        </a>
-
-        <a href="products/assure.html" class="showcase-bento__card showcase-bento__card--5">
-          <img src="assets/Design/Assure1.webp" alt="Assure — Operational Assurance" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Operational Assurance</span>
-            <h3>Assure.</h3>
-            <p>Compliance, assessments, certification control, and continuous improvement.</p>
-          </div>
-        </a>
-
-        <a href="products/prism.html" class="showcase-bento__card showcase-bento__card--6">
-          <img src="assets/Design/prism-fire-safety.jpg" alt="Prism — Fire Safety risk-based inspection dashboard" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Fire Safety</span>
-            <h3>Prism.</h3>
-            <p>Risk-based fire safety inspections with action and evidence control.</p>
-          </div>
-        </a>
-
-        <a href="products/aspire.html" class="showcase-bento__card showcase-bento__card--7">
-          <img src="assets/Design/aspire-dashboard.png" alt="Aspire — Rolling stock competency management interface" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Competency Management</span>
-            <h3>Aspire.</h3>
-            <p>Rolling stock competence, reassessment cycles, and ORR-aligned assurance.</p>
-          </div>
-        </a>
-
-        <a href="products/atlas.html" class="showcase-bento__card showcase-bento__card--8">
-          <img src="assets/Design/prism-dashboard.jpg" alt="Atlas — Site Management" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Site Management</span>
-            <h3>Atlas.</h3>
-            <p>Site sign-in, visitor control, and audit readiness in one operational system.</p>
-          </div>
-        </a>
-
-        <a href="contact.html" class="showcase-bento__card showcase-bento__card--9">
-          <img src="assets/Design/amis-customer.jpg" alt="AMIS Customer — Data analytics and customer insights interface" class="showcase-bento__img" loading="lazy">
-          <div class="showcase-bento__overlay">
-            <span class="showcase-bento__eyebrow">Data Analytics &amp; Insights</span>
-            <h3>AMIS Customer.</h3>
-            <p>Customer insight, complaint intelligence, management reporting, and analytics.</p>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== VIDEO REEL SECTION ===== -->
-  <section class="video-reel">
+    <!-- Preserved: complete original video, poster and timed messages. -->
+    <section class="video-reel">
     <div class="video-reel__overlay"></div>
     <video class="video-reel__bg" autoplay muted loop playsinline preload="metadata" poster="assets/Design/Atlas1.webp">
       <source src="assets/services-reel-final.mp4" type="video/mp4">
@@ -247,8 +139,65 @@
     </div>
   </section>
 
-  <!-- ===== ABOUT / STATS SECTION ===== -->
-  <section class="about" id="about">
+    <section class="home-section home-capabilities" aria-labelledby="capabilities-heading">
+      <div class="showcase-bento__particles" id="bentoParticles" aria-hidden="true"></div>
+      <div class="container home-layer"><div class="home-section-heading"><div><p class="home-eyebrow">Our capabilities</p><h2 id="capabilities-heading">One connected technology ecosystem.</h2></div><p>From sensing to insight to action, Apexiar connects people, assets and information around the operational requirement.</p></div><div class="home-capability-grid"><a class="home-capability fade-in" href="software-intelligence.html"><img src="assets/Design/Expertise/Data insights.jpg" alt="" loading="lazy"><div class="home-capability__content"><svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="5" width="24" height="19" rx="2"/><path d="M10 29h12M16 24v5M10 19v-5m6 5V9m6 10v-8"/></svg><h3>Software &amp;<br>Intelligence</h3><p>Turn operational data into clearer, faster decisions.</p><span class="home-capability__arrow" aria-hidden="true">&rarr;</span></div></a>
+<a class="home-capability fade-in" href="connected-systems.html"><img src="assets/Design/Connected/track-node.webp" alt="" loading="lazy"><div class="home-capability__content"><svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="16" cy="6" r="3"/><circle cx="6" cy="25" r="3"/><circle cx="26" cy="25" r="3"/><path d="m14 9-7 13m11-13 7 13M9 25h14"/></svg><h3>Connected<br>Systems</h3><p>Connected sensing and integration for physical assets.</p><span class="home-capability__arrow" aria-hidden="true">&rarr;</span></div></a>
+<a class="home-capability fade-in" href="aerial-intelligence.html"><img src="assets/Design/Aerial/drone.jpg" alt="" loading="lazy"><div class="home-capability__content"><svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 13h8v8h-8zM4 7l8 6m16-6-8 6M4 26l8-5m16 5-8-5M1 7h7m16 0h7M1 26h7m16 0h7"/></svg><h3>Aerial<br>Intelligence</h3><p>Visual and thermal evidence to see more and understand sooner.</p><span class="home-capability__arrow" aria-hidden="true">&rarr;</span></div></a>
+<a class="home-capability fade-in" href="advisory-deployment.html"><img src="assets/Design/Advisory/re-engineering.jpg" alt="" loading="lazy"><div class="home-capability__content"><svg width="34" height="34" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="m12 3 8 0 1 5 4 2 4-1 2 7-4 3-1 4 1 4-7 3-3-4-4-1-4 2-4-7 3-4 1-4-2-4 7-3z"/></svg><h3>Advisory &amp;<br>Deployment</h3><p>Practical expertise from engineering strategy to operations.</p><span class="home-capability__arrow" aria-hidden="true">&rarr;</span></div></a></div></div>
+    </section>
+    <section class="expertise home-operating" aria-labelledby="operating-heading">
+    <div class="expertise__globe" aria-hidden="true">
+      <canvas class="expertise__globe-dots"></canvas>
+      <div class="expertise__globe-rim"></div>
+      <div class="expertise__globe-rays"></div>
+    </div>
+      <div class="container expertise__inner"><p class="home-eyebrow">From evidence to action</p><h2 class="home-section-title" id="operating-heading">Sense. Connect. Understand. Act.</h2>
+        <ol class="home-flow"><li><h3>Sense</h3><p>Capture condition and context through aerial inspection, asset sensing and operational records.</p></li><li><h3>Connect</h3><p>Bring equipment, people and data together through telemetry and systems integration.</p></li><li><h3>Understand</h3><p>Turn information into priorities with software, analysis and applied intelligence.</p></li><li><h3>Act</h3><p>Support engineering decisions, coordinated workflows and safe deployment.</p></li></ol>
+      </div>
+    </section>
+    <!-- Scroll-controlled inspection: additive section; original content retained. -->
+    <section class="inspection" id="aerial-inspection" data-inspection aria-labelledby="inspection-heading">
+      <div class="inspection__stage">
+        <div class="inspection__chrome"><span class="inspection__mode">Aerial inspection</span><a class="inspection__skip" href="#after-inspection">Skip inspection animation &darr;</a></div>
+        <div class="inspection__intro"><h2 id="inspection-heading">From aerial inspection to engineering insight.</h2><p>Capture detailed imagery, locate potential issues and support informed maintenance decisions.</p></div>
+        <div class="inspection__media">
+          <img class="inspection__poster" src="assets/media/apexiar-turbine-poster.jpg?v=approved-zoom" alt="Illustrative drone approach to a coastal wind turbine" width="1600" height="902" loading="lazy">
+          <video class="inspection__video" data-src="assets/media/apexiar-turbine-inspection.mp4?v=approved-zoom" poster="assets/media/apexiar-turbine-poster.jpg?v=approved-zoom" muted playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <div class="inspection__target" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="inspection__target-label"><span class="inspection__tag-id">Observation / 01</span>Potential surface damage<small>Review required</small></span></div>
+          <p class="inspection__status" role="status"></p>
+        </div>
+        <svg class="inspection__links" aria-hidden="true" focusable="false">
+          <g class="inspection__tag-link"><path></path><circle r="3"></circle></g>
+          <g class="inspection__evidence-link"><path></path><circle r="3"></circle></g>
+        </svg>
+        <div class="inspection__evidence" aria-hidden="true">
+          <img src="assets/media/apexiar-turbine-evidence.jpg?v=approved-zoom" alt="Illustrative close-up of a turbine blade surface observation" width="480" height="270" loading="lazy">
+          <div><h3>Inspection image captured</h3><div class="inspection__finding"><p class="inspection__eyebrow">Blade surface observation</p><p>Potential surface damage</p><small>Status: Engineering review required</small></div></div>
+        </div>
+        <div class="inspection__bottom"><div>
+          <div class="inspection__approach"><p class="inspection__caption">Precision capture.</p><p class="inspection__support">Detailed imagery of critical infrastructure.</p></div>
+          <p class="inspection__closing inspection__caption" aria-hidden="true">Evidence to inform your next decision.</p>
+          <p class="inspection__fallback">Detailed aerial imagery provides evidence for engineering review and informed maintenance decisions.</p>
+          <p class="inspection__workflow">Illustrative inspection workflow</p>
+        </div><a class="inspection__cta" href="aerial-intelligence.html">Explore aerial inspection &rarr;</a></div>
+        <div class="inspection__progress" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+    <section id="after-inspection" tabindex="-1" class="home-assurance" aria-label="Certification and registration"><div class="container">
+      <div class="hero__trust-strip">
+        <span class="hero__trust-label">Certified &amp; Compliant</span>
+        <div class="hero__trust-badges">
+          <img src="assets/cyber-essentials.webp" alt="Cyber Essentials Certified" class="hero__trust-badge">
+          <img src="assets/ICO.webp" alt="ICO Registered" class="hero__trust-badge">
+        </div>
+      </div>
+    </div></section>
+
+
+
+    <!-- Preserved: original regulated-industries mission and statistics. -->
+    <section class="about" id="about">
     <div class="container">
       <h2 class="section-title">Built for Regulated Industries and Complex Operations</h2>
       <p class="section-subtitle">Apexiar was founded with a single mission: to deliver real world software systems for complex operational environments where reliability, safety, and trust are essential.</p>
@@ -273,409 +222,19 @@
     </div>
   </section>
 
-  <!-- ===== EXPERTISE SECTION ===== -->
-  <section class="expertise" aria-labelledby="expertise-heading">
-    <div class="expertise__globe" aria-hidden="true">
-      <canvas class="expertise__globe-dots"></canvas>
-      <div class="expertise__globe-rim"></div>
-      <div class="expertise__globe-rays"></div>
-    </div>
-    <div class="container expertise__inner">
-      <div class="expertise__intro">
-        <p class="expertise__kicker">Beyond software development</p>
-        <h2 class="expertise__headline" id="expertise-heading">Intelligence. Automation. <span>Impact.</span></h2>
-        <p class="expertise__lede">Applied AI, automation, data and transformation expertise for safety critical &amp; complex operations.</p>
-      </div>
+    <section class="home-section home-sector-section" id="sectors" aria-labelledby="sectors-heading"><div class="container"><p class="home-eyebrow">Where we work</p><h2 class="home-section-title" id="sectors-heading">Critical operations. Real-world requirements.</h2><div class="home-sector-grid">
+      <article id="rail"><span class="home-number">01 / RAIL</span><h3>Rail</h3><p>Connect fleet intelligence, infrastructure inspection and engineering support across the asset lifecycle.</p><a href="connected-systems.html">Explore rail sensing programmes &rarr;</a><a href="aerial-intelligence.html">Aerial inspection &amp; vegetation intelligence &rarr;</a><a href="sectors/rail.html">Explore all rail capabilities &rarr;</a></article>
+      <article id="fire-emergency"><span class="home-number">02 / EMERGENCY RESPONSE</span><h3>Fire &amp; Emergency Response</h3><p>Bring incident records, risk information and aerial evidence into operational planning and response.</p><a href="products/prism.html">Explore Prism &rarr;</a><a href="aerial-intelligence.html">Visual &amp; thermal intelligence &rarr;</a><a href="sectors/fire-emergency-response.html">Explore fire &amp; emergency capabilities &rarr;</a></article>
+      <article id="energy-infrastructure"><span class="home-number">03 / INFRASTRUCTURE</span><h3>Energy &amp; Infrastructure</h3><p>Understand asset condition, coordinate maintenance and plan the engineering work that supports reliable operations.</p><a href="products/artemis.html">Explore Artemis &rarr;</a><a href="advisory-deployment.html">Engineering &amp; lifecycle support &rarr;</a><a href="sectors/energy-infrastructure.html">Explore energy &amp; infrastructure capabilities &rarr;</a></article>
+    </div></div></section>
+    <section class="home-section home-technologies" id="products" aria-labelledby="technologies-heading"><div class="container"><div class="home-section-heading"><div><p class="home-eyebrow">Selected technologies</p><h2 id="technologies-heading">Intelligence where it matters.</h2></div><a href="software-intelligence.html#products" class="home-text-link">View the complete software portfolio &rarr;</a></div><div class="home-technology-grid">
+      <a href="products/axis.html"><img src="assets/Design/Axis/axis-homepage.png" alt="AXIS maintenance analytics dashboard showing fault trends and repair times" loading="lazy"><div><h3>AXIS</h3><p>AI Powered Maintenance Intelligence Platform</p><span>Explore AXIS &rarr;</span></div></a>
+      <a href="products/artemis.html"><img src="assets/Design/artemis1.webp" alt="" loading="lazy"><div><h3>Artemis</h3><p>Asset management and coordinated maintenance.</p><span>Explore Artemis &rarr;</span></div></a>
+      <a href="products/prism.html"><img src="assets/Design/prism-fire-safety.jpg" alt="" loading="lazy"><div><h3>Prism</h3><p>Fire safety and risk intelligence.</p><span>Explore Prism &rarr;</span></div></a>
+    </div><p class="home-portfolio-note">The complete product tile collection, detailed portfolio and software expertise are preserved on <a href="software-intelligence.html">Software &amp; Intelligence</a>.</p></div></section>
 
-      <div class="expertise__grid">
-        <article class="expertise__item expertise__item--ai" tabindex="0">
-          <div class="expertise__card">
-            <div class="expertise__photo">
-              <img src="assets/Design/Expertise/AI.jpg" alt="AI expertise" loading="lazy">
-            </div>
-            <div class="expertise__foot">
-              <div class="expertise__icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="2"/>
-                  <path d="M20 8v4M20 28v4M8 20h4M28 20h4M11.5 11.5l2.8 2.8M25.7 25.7l2.8 2.8M28.5 11.5l-2.8 2.8M14.3 25.7l-2.8 2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <h3>AI</h3>
-              <span class="expertise__bar"></span>
-            </div>
-          </div>
-          <div class="expertise__panel">
-            <div class="expertise__panel-caret"></div>
-            <div class="expertise__panel-inner">
-              <div class="expertise__panel-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="2"/>
-                  <path d="M20 8v4M20 28v4M8 20h4M28 20h4M11.5 11.5l2.8 2.8M25.7 25.7l2.8 2.8M28.5 11.5l-2.8 2.8M14.3 25.7l-2.8 2.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <p>Applied AI models that strengthen operational decisions, surface risk earlier, and improve response quality in complex environments.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="expertise__item expertise__item--agents" tabindex="0">
-          <div class="expertise__card">
-            <div class="expertise__photo">
-              <img src="assets/Design/Expertise/AI agents.jpg" alt="AI Agents expertise" loading="lazy">
-            </div>
-            <div class="expertise__foot">
-              <div class="expertise__icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-                  <rect x="10" y="12" width="20" height="16" rx="4" stroke="currentColor" stroke-width="2"/>
-                  <path d="M15 28v2.5M25 28v2.5M14 18h.01M26 18h.01M16 22h8M20 8v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <h3>AI Agents</h3>
-              <span class="expertise__bar"></span>
-            </div>
-          </div>
-          <div class="expertise__panel">
-            <div class="expertise__panel-caret"></div>
-            <div class="expertise__panel-inner">
-              <div class="expertise__panel-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                  <rect x="10" y="12" width="20" height="16" rx="4" stroke="currentColor" stroke-width="2"/>
-                  <path d="M15 28v2.5M25 28v2.5M14 18h.01M26 18h.01M16 22h8M20 8v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <p>Role-specific agents that triage signals, guide teams, and accelerate action across repeatable operational workflows.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="expertise__item expertise__item--automation" tabindex="0">
-          <div class="expertise__card">
-            <div class="expertise__photo">
-              <img src="assets/Design/Expertise/automation.jpg" alt="Automation expertise" loading="lazy">
-            </div>
-            <div class="expertise__foot">
-              <div class="expertise__icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-                  <path d="M11 28h18M14 28V14l7-4 5 3v15M22 18l4-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <h3>Automation</h3>
-              <span class="expertise__bar"></span>
-            </div>
-          </div>
-          <div class="expertise__panel">
-            <div class="expertise__panel-caret"></div>
-            <div class="expertise__panel-inner">
-              <div class="expertise__panel-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                  <path d="M11 28h18M14 28V14l7-4 5 3v15M22 18l4-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <p>Streamlined processes that reduce manual effort, improve consistency, and create dependable operational throughput.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="expertise__item expertise__item--consultancy" tabindex="0">
-          <div class="expertise__card">
-            <div class="expertise__photo">
-              <img src="assets/Design/Expertise/Consultancy.jpg" alt="Consultancy expertise" loading="lazy">
-            </div>
-            <div class="expertise__foot">
-              <div class="expertise__icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-                  <path d="M10 28c1.5-4 5-6 10-6s8.5 2 10 6M14 17a4 4 0 1 0 0-.01M26 17a4 4 0 1 0 0-.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <h3>Consultancy</h3>
-              <span class="expertise__bar"></span>
-            </div>
-          </div>
-          <div class="expertise__panel">
-            <div class="expertise__panel-caret"></div>
-            <div class="expertise__panel-inner">
-              <div class="expertise__panel-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                  <path d="M10 28c1.5-4 5-6 10-6s8.5 2 10 6M14 17a4 4 0 1 0 0-.01M26 17a4 4 0 1 0 0-.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-                <p>Strategic guidance and support across rail, energy, emergency services, business transformation and AI readiness.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="expertise__item expertise__item--insights" tabindex="0">
-          <div class="expertise__card">
-            <div class="expertise__photo">
-              <img src="assets/Design/Expertise/Data insights.jpg" alt="Data Insights expertise" loading="lazy">
-            </div>
-            <div class="expertise__foot">
-              <div class="expertise__icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-                  <path d="M12 28V18M20 28V12M28 28V21M10 30h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <h3>Data Insights</h3>
-              <span class="expertise__bar"></span>
-            </div>
-          </div>
-          <div class="expertise__panel">
-            <div class="expertise__panel-caret"></div>
-            <div class="expertise__panel-inner">
-              <div class="expertise__panel-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                  <path d="M12 28V18M20 28V12M28 28V21M10 30h20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <p>Clear reporting, trends, and performance insight that transform fragmented operational data into better decisions.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="expertise__item expertise__item--ml" tabindex="0">
-          <div class="expertise__card">
-            <div class="expertise__photo">
-              <img src="assets/Design/Expertise/Machine Learning.jpg" alt="Machine Learning expertise" loading="lazy">
-            </div>
-            <div class="expertise__foot">
-              <div class="expertise__icon" aria-hidden="true">
-                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-                  <path d="M12 26l5-5 4 4 7-9M11 12h18M11 30h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <h3>Machine Learning</h3>
-              <span class="expertise__bar"></span>
-            </div>
-          </div>
-          <div class="expertise__panel">
-            <div class="expertise__panel-caret"></div>
-            <div class="expertise__panel-inner">
-              <div class="expertise__panel-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 40 40" fill="none">
-                  <path d="M12 26l5-5 4 4 7-9M11 12h18M11 30h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <p>Predictive models tuned against live operational datasets to surface emerging issues and guide timely intervention.</p>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== PRODUCTS SECTION ===== -->
-  <section class="ecosystem" id="products">
-    <div class="container">
-      <h2 class="section-title">The Apexiar Product Portfolio</h2>
-      <p class="section-subtitle">Our core products developed with and for regulated industries, from rail and energy to fire and rescue. Deploy standalone or integrate as connected modules.</p>
-
-      <div class="ecosystem__grid">
-
-        <!-- ARTEMIS -->
-        <a href="products/artemis.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect x="8" y="12" width="32" height="28" rx="4" stroke="#B8860B" stroke-width="2"/>
-              <path d="M8 20h32" stroke="#B8860B" stroke-width="2"/>
-              <rect x="12" y="24" width="10" height="8" rx="2" fill="#B8860B" opacity="0.2" stroke="#B8860B" stroke-width="1.5"/>
-              <rect x="26" y="24" width="10" height="8" rx="2" fill="#B8860B" opacity="0.2" stroke="#B8860B" stroke-width="1.5"/>
-              <path d="M20 8v4M28 8v4" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>Artemis</h3>
-            <span class="ecosystem__card-tag">Facility Management</span>
-            <p>Strengthen compliance, automate maintenance workflows, reduce asset downtime, cut costs, and shift from reactive to predictive.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- ATLAS -->
-        <a href="products/atlas.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect x="6" y="6" width="36" height="36" rx="6" stroke="#B8860B" stroke-width="2"/>
-              <path d="M14 14h20v20H14z" fill="#B8860B" opacity="0.1"/>
-              <path d="M18 24l4 4 8-8" stroke="#B8860B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>Atlas</h3>
-            <span class="ecosystem__card-tag">Site Management</span>
-            <p>Automate visitor and contractor management, tighten site security, enhance compliance, and consolidate every site operation into one platform.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- ATOM -->
-        <a href="products/atom.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <path d="M8 28h6l4-10 6 18 5-14h11" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12" cy="18" r="3" fill="#B8860B" opacity="0.16" stroke="#B8860B" stroke-width="1.7"/>
-              <circle cx="36" cy="16" r="3" fill="#B8860B" opacity="0.16" stroke="#B8860B" stroke-width="1.7"/>
-              <path d="M12 21v5M36 19v6" stroke="#B8860B" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>Atom</h3>
-            <span class="ecosystem__card-tag">Telemetry &amp; Asset Health</span>
-            <p>Ingest live asset data, monitor health in real time, apply rules and alerts, and give teams earlier visibility of emerging issues.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- AMIS -->
-        <a href="products/amis.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <path d="M24 8L6 40h36L24 8z" stroke="#B8860B" stroke-width="2" fill="#B8860B" opacity="0.1"/>
-              <path d="M24 20v10" stroke="#B8860B" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="24" cy="34" r="1.5" fill="#B8860B"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>AMIS</h3>
-            <span class="ecosystem__card-tag">Insights & Analytics</span>
-            <p>Automate data flows, unlock AI-powered strategic planning, and consolidate reporting into a single source of truth.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- AMIS CUSTOMER -->
-        <a href="contact.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect x="8" y="9" width="32" height="26" rx="4" stroke="#B8860B" stroke-width="2"/>
-              <path d="M14 29l6-7 5 4 8-10" stroke="#B8860B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M14 39h20M18 35v4M30 35v4" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="33" cy="16" r="3" fill="#B8860B" opacity="0.18"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>AMIS Customer</h3>
-            <span class="ecosystem__card-tag">Data Insights &amp; Forecasting</span>
-            <p>Integrate fragmented data, generate actionable insights, and support operational decision-making and forecasting from a single view.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- AXIS -->
-        <a href="products/axis.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="24" r="16" stroke="#B8860B" stroke-width="2" fill="#B8860B" opacity="0.05"/>
-              <circle cx="24" cy="24" r="8" stroke="#B8860B" stroke-width="2" fill="#B8860B" opacity="0.1"/>
-              <circle cx="24" cy="24" r="3" fill="#B8860B"/>
-              <path d="M24 6v4M24 38v4M6 24h4M38 24h4" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>Axis</h3>
-            <span class="ecosystem__card-tag">AI Fault Finding</span>
-            <p>Reduce downtime, improve asset availability, and leverage machine learning to predict failures before they happen — with an AI diagnostic assistant on hand.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- ASSURE -->
-        <a href="products/assure.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <path d="M24 6L8 14v12c0 10 7 18 16 20 9-2 16-10 16-20V14L24 6z" stroke="#B8860B" stroke-width="2" fill="#B8860B" opacity="0.1"/>
-              <path d="M18 24l4 4 8-8" stroke="#B8860B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>Assure</h3>
-            <span class="ecosystem__card-tag">Compliance & Competence</span>
-            <p>Strengthen compliance, demonstrate workforce competence, automate training requirements, and let an AI assistant keep you audit-ready.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- PRISM -->
-        <a href="products/prism.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <path d="M14 10h20l8 8v18a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4Z" stroke="#B8860B" stroke-width="2"/>
-              <path d="M34 10v10h10" stroke="#B8860B" stroke-width="2"/>
-              <path d="M18 28h12M18 22h8" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="31" cy="30" r="5" fill="#B8860B" opacity="0.15" stroke="#B8860B" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>Prism</h3>
-            <span class="ecosystem__card-tag">Fire Safety</span>
-            <p>Plan risk-based inspections, surface critical remediation actions, and build auditable fire safety evidence from a single command view.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-        <!-- ASPIRE -->
-        <a href="products/aspire.html" class="ecosystem__card">
-          <div class="ecosystem__card-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect x="8" y="10" width="32" height="24" rx="4" stroke="#B8860B" stroke-width="2"/>
-              <path d="M14 38h20" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="18" cy="20" r="4" fill="#B8860B" opacity="0.12" stroke="#B8860B" stroke-width="1.6"/>
-              <path d="M26 18h8M26 24h6" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/>
-              <path d="M16 28l3 3 6-7" stroke="#B8860B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="ecosystem__card-content">
-            <h3>Aspire</h3>
-            <span class="ecosystem__card-tag">Rolling Stock Competence</span>
-            <p>Manage rolling stock competence, reassessment cycles, and authority-to-work controls in line with ORR-aligned assurance principles.</p>
-          </div>
-          <div class="ecosystem__card-arrow">&rarr;</div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== WHY APEXIAR ===== -->
-  <section class="features" id="why-apexiar">
-    <div class="container">
-      <h2 class="section-title">Why organisations choose Apexiar</h2>
-      <p class="section-subtitle">Enterprise-grade systems built for the real world of operations.</p>
-      <div class="features__grid">
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="14" stroke="#B8860B" stroke-width="2"/><path d="M20 12v8l5 5" stroke="#B8860B" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Modular by Design</h3>
-          <p>Deploy standalone products or connect them as integrated modules, giving organisations flexibility without unnecessary complexity.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="4" y="8" width="32" height="24" rx="4" stroke="#E8922F" stroke-width="2"/><path d="M4 16h32" stroke="#E8922F" stroke-width="2"/><path d="M12 24h8M12 28h5" stroke="#E8922F" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Real-Time Operational Intelligence</h3>
-          <p>Live dashboards, automated alerts and AI-driven insight help teams see issues earlier and make better-informed decisions.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M20 4L6 12v8c0 8.8 5.9 17 14 19 8.1-2 14-10.2 14-19v-8L20 4z" stroke="#10B981" stroke-width="2"/><path d="M15 20l3 3 7-7" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Built for Regulated Environments</h3>
-          <p>Role-based access, secure data handling, audit trails and compliance-focused design support industries where assurance matters.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-card__icon">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M10 30V18M20 30V10M30 30V22" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/><path d="M6 34h28" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Scales with You</h3>
-          <p>From a single site to hundreds of locations. Apexiar grows with your operations without performance trade-offs.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== TESTIMONIAL ===== -->
-  <section class="testimonial-break" aria-label="Customer testimonial">
+    <!-- Preserved: complete original customer feedback and attribution. -->
+    <section class="testimonial-break" aria-label="Customer testimonial">
     <div class="container testimonial-break__inner">
 
       <div class="testimonial-break__quote-wrap">
@@ -706,86 +265,49 @@
     </div>
   </section>
 
-  <!-- ===== HOW TO GET STARTED ===== -->
-  <section class="how-it-works">
-    <div class="container">
-      <h2 class="section-title">How to get started</h2>
-      <p class="section-subtitle">Three steps to transform your operations.</p>
-      <div class="steps">
-        <div class="step">
-          <div class="step__number">1</div>
-          <h3>Discover</h3>
-          <p>We understand your operation, challenges and objectives, then recommend the right product, module or bespoke solution.</p>
-        </div>
-        <div class="step__connector"></div>
-        <div class="step">
-          <div class="step__number">2</div>
-          <h3>Configure</h3>
-          <p>We set up users, workflows, sites, permissions, integrations and reporting, with training and support included.</p>
-        </div>
-        <div class="step__connector"></div>
-        <div class="step">
-          <div class="step__number">3</div>
-          <h3>Deploy</h3>
-          <p>You go live with dashboards, automated workflows, alerts and insight that help your teams act with confidence.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CTA SECTION ===== -->
-  <section class="cta-section">
-    <div class="container cta-section__inner">
-      <h2>Ready to transform your operations?</h2>
-      <p>Whether you need a single solution or a fully integrated ecosystem, we'll work with you to build the right platform for your organisation.</p>
-      <div class="cta-section__buttons">
-        <a href="contact.html" class="btn btn--primary btn--lg">Contact Us <span class="btn__arrow">&rarr;</span></a>
-      </div>
-    </div>
-  </section>
-
+    <section class="home-section" id="why-apexiar" aria-labelledby="delivery-heading"><div class="container"><p class="home-eyebrow">From requirement to operation</p><h2 class="home-section-title" id="delivery-heading">Discover. Engineer. Validate. Deploy.</h2><ol class="home-delivery"><li><span>01</span><h3>Discover</h3><p>Define the challenge, operating environment and evidence needed with your team.</p></li><li><span>02</span><h3>Engineer</h3><p>Combine software, sensing and engineering around the required outcome.</p></li><li><span>03</span><h3>Validate</h3><p>Test against operational requirements and build the evidence for assurance and required approvals.</p></li><li><span>04</span><h3>Deploy</h3><p>Integrate, train and support your teams as the capability enters service.</p></li></ol><a class="home-text-link" href="advisory-deployment.html">Explore our delivery approach &rarr;</a><p class="home-portfolio-note"><a href="software-intelligence.html#why-apexiar">Why organisations choose our software &rarr;</a></p></div></section>
+    <section class="cta-section" aria-labelledby="enquiry-heading"><div class="container cta-section__inner"><h2 id="enquiry-heading">What does your operation need next?</h2><p>Bring us the challenge. We will help define the right combination of software, connected systems, aerial intelligence and engineering support.</p><div class="cta-section__buttons"><a href="contact.html" class="btn btn--primary btn--lg">Discuss a requirement <span class="btn__arrow">&rarr;</span></a><a href="blog.html" class="btn btn--ghost btn--lg">Explore our insights</a></div></div></section>
   </main>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer" id="contact">
-    <div class="container footer__inner">
-      <div class="footer__brand">
-        <div class="navbar__logo">
-          <img src="assets/Apexiar.webp" alt="Apexiar" class="footer__logo-img">
+  <footer class="footer site-footer" id="contact"><div class="container footer__inner"><div class="footer__brand"><a href="index.html"><img src="assets/Apexiar.webp" alt="Apexiar" class="footer__logo-img"></a><p>Applied technology for regulated and safety-critical operations. Software, connected systems, aerial intelligence and engineering support.</p></div><div class="footer__links">
+        <div class="footer__col"><h2 class="footer__heading">Capabilities</h2>
+          <a href="software-intelligence.html">Software &amp; Intelligence</a>
+          <a href="connected-systems.html">Connected Systems</a>
+          <a href="aerial-intelligence.html">Aerial Intelligence</a>
+          <a href="advisory-deployment.html">Advisory &amp; Deployment</a>
         </div>
-        <p>Enterprise solutions for asset management, site, and operational management. Built for automation, compliance, and security first.</p>
-      </div>
-      <div class="footer__links">
-        <div class="footer__col">
-          <h4>Products</h4>
+        <div class="footer__col"><h2 class="footer__heading">Sectors</h2>
+          <a href="sectors/rail.html">Rail</a>
+          <a href="sectors/fire-emergency-response.html">Fire &amp; Emergency Response</a>
+          <a href="sectors/energy-infrastructure.html">Energy &amp; Infrastructure</a>
+        </div>
+        <div class="footer__col"><h2 class="footer__heading">Software</h2>
+          <a href="products/atom.html">Atom</a>
           <a href="products/artemis.html">Artemis</a>
           <a href="products/atlas.html">Atlas</a>
           <a href="products/amis.html">AMIS</a>
+          <a href="contact.html">AMIS Customer</a>
           <a href="products/axis.html">Axis</a>
           <a href="products/assure.html">Assure</a>
           <a href="products/prism.html">Prism</a>
           <a href="products/aspire.html">Aspire</a>
         </div>
-        <div class="footer__col">
-          <h4>Company</h4>
+        <div class="footer__col"><h2 class="footer__heading">Company</h2>
           <a href="index.html#about">About</a>
-          <a href="blog.html">Blog</a>
+          <a href="blog.html">Insights</a>
           <a href="services.html">Services</a>
           <a href="contact.html">Contact</a>
         </div>
-        <div class="footer__col">
-          <h4>Legal</h4>
+        <div class="footer__col"><h2 class="footer__heading">Legal</h2>
           <a href="privacy.html">Privacy</a>
           <a href="cookies.html">Cookies</a>
+          <button type="button" data-cookie-settings hidden>Cookie settings</button>
           <a href="carbon-reduction-plan.html">Carbon Reduction Plan</a>
         </div>
-      </div>
-    </div>
-    <div class="container footer__bottom">
-      <p>&copy; 2026 Apexiar. All rights reserved.</p>
-    </div>
-  </footer>
+      </div></div><div class="container footer__bottom"><p>&copy; 2026 Apexiar. All rights reserved.</p></div></footer>
 
   <script src="script.js" defer></script>
+  <script src="inspection.js?v=digital-callouts" defer></script>
 </body>
 </html>

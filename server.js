@@ -23,7 +23,35 @@ const MIME_TYPES = {
   '.xml': 'application/xml; charset=utf-8'
 };
 
-function sendFile(filePath, response, statusCode = 200) {
+function sendFile(filePath, request, response, statusCode = 200) {
+  // Browser video seeking needs byte ranges; stream media instead of buffering it.
+  if (path.extname(filePath).toLowerCase() === '.mp4' && statusCode === 200) {
+    fs.stat(filePath, (error, stats) => {
+      if (error) { response.writeHead(500); response.end(); return; }
+      const headers = { 'Content-Type': 'video/mp4', 'Accept-Ranges': 'bytes' };
+      let start = 0, end = stats.size - 1, status = 200;
+      if (request.headers.range) {
+        const match = /^bytes=(\d*)-(\d*)$/.exec(request.headers.range);
+        if (match && (match[1] || match[2])) {
+          if (!match[1]) start = Math.max(0, stats.size - Number(match[2]));
+          else { start = Number(match[1]); if (match[2]) end = Math.min(end, Number(match[2])); }
+        }
+        if (!match || !(match[1] || match[2]) || !Number.isSafeInteger(start) || !Number.isSafeInteger(end) || start > end || start >= stats.size) {
+          response.writeHead(416, { ...headers, 'Content-Range': `bytes */${stats.size}` }); response.end(); return;
+        }
+        status = 206;
+        headers['Content-Range'] = `bytes ${start}-${end}/${stats.size}`;
+      }
+      headers['Content-Length'] = end - start + 1;
+      response.writeHead(status, headers);
+      if (request.method === 'HEAD') { response.end(); return; }
+      const stream = fs.createReadStream(filePath, { start, end });
+      stream.on('error', () => response.destroy());
+      response.on('close', () => stream.destroy());
+      stream.pipe(response);
+    });
+    return;
+  }
   fs.readFile(filePath, (error, content) => {
     if (error) {
       response.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -67,14 +95,14 @@ const server = http.createServer((request, response) => {
 
     fs.stat(filePath, (fileError, fileStats) => {
       if (!fileError && fileStats.isFile()) {
-        sendFile(filePath, response);
+        sendFile(filePath, request, response);
         return;
       }
 
       const notFoundPath = path.join(ROOT, '404.html');
       fs.stat(notFoundPath, (notFoundError, notFoundStats) => {
         if (!notFoundError && notFoundStats.isFile()) {
-          sendFile(notFoundPath, response, 404);
+          sendFile(notFoundPath, request, response, 404);
           return;
         }
 

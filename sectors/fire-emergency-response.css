@@ -1,0 +1,53 @@
+/* Fire and Emergency Response sector additions using the existing Apexiar design system. */
+.fire-page .fire-hero { min-height: 0; padding: 160px 0 80px; }
+.fire-hero__layout { position: relative; z-index: 1; display: grid; gap: 48px; align-items: center; }
+.fire-hero h1 { color: var(--text-heading); font-size: clamp(2.2rem, 4.5vw, 4.3rem); line-height: 1.1; letter-spacing: -.035em; margin-bottom: 24px; }
+.fire-hero h1 span { color: var(--accent-light); }
+.fire-eyebrow { color: var(--accent-light); font-size: .72rem; font-weight: 700; line-height: 1.6; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 16px; }
+.fire-lead { color: var(--text); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.8; margin-bottom: 24px; }
+.fire-detail { color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
+.fire-page .hero__cta-group { justify-content: flex-start; }
+.fire-section { padding: 80px 0; }
+.fire-section--tinted { background: linear-gradient(120deg, #06101e, var(--bg)); border-block: 1px solid var(--border); }
+.fire-page .section-title, .fire-page .section-subtitle { text-align: left; margin-left: 0; }
+.fire-visual { margin: 0; min-width: 0; overflow: hidden; border: 1px solid rgba(99,221,255,.22); border-radius: var(--radius-lg); background: var(--bg-card); }
+.fire-visual img, .fire-card > img { display: block; width: 100%; height: auto; }
+.fire-visual figcaption { padding: 14px 20px; color: var(--text-muted); font-size: .78rem; line-height: 1.6; border-top: 1px solid var(--border); }
+.fire-challenges, .fire-sensors { display: grid; gap: 24px; margin-top: 36px; }
+.fire-challenges article { border-top: 1px solid rgba(99,221,255,.35); padding-top: 24px; }
+.fire-number { color: var(--hero-neon-mid); font-size: .75rem; letter-spacing: .1em; }
+.fire-challenges h3, .fire-card h3 { color: var(--text-heading); font-size: 1.3rem; line-height: 1.4; margin: 14px 0; }
+.fire-challenges p, .fire-card p { color: var(--text-muted); line-height: 1.8; }
+.fire-feature { display: grid; gap: 40px; align-items: center; }
+.fire-links { display: grid; gap: 16px; }
+.fire-links a, .fire-link, .fire-card a { color: var(--accent-light); line-height: 1.7; }
+.fire-links a { padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.fire-links a:hover, .fire-link:hover, .fire-card a:hover { text-decoration: underline; }
+.fire-card { overflow: hidden; border: 1px solid rgba(184,134,11,.3); border-radius: var(--radius-lg); background: var(--bg-card); }
+.fire-card__body { padding: 28px; }
+.fire-card .fire-status { color: var(--accent-light); text-transform: uppercase; font-size: .72rem; font-weight: 700; letter-spacing: .07em; }
+.fire-card .fire-note { margin: 20px 0; padding-left: 16px; border-left: 2px solid var(--accent-light); font-size: .85rem; }
+.fire-page [id] { scroll-margin-top: 100px; }
+.fire-page a:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 4px; }
+@media (min-width: 768px) {
+  .fire-challenges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .fire-sensors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .fire-hero__layout, .fire-feature { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .fire-page .container { padding-inline: 20px; }
+  .fire-page .fire-hero { padding: 120px 0 56px; }
+  .fire-section { padding: 56px 0; }
+  .fire-card__body { padding: 22px; }
+  .fire-page .btn { white-space: normal; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.fire-page) { scroll-behavior: auto; }
+  .fire-page *, .fire-page *::before, .fire-page *::after { animation: none !important; transition: none !important; }
+  .fire-page .hero__particles { display: none; }
+  .fire-page .fade-in { opacity: 1; transform: none; }
+}
+
+.fire-link--spaced { display: inline-block; margin-top: 28px; }

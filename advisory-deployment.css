@@ -1,0 +1,55 @@
+/* Advisory page additions; reuse the existing brand and service cards. */
+.advisory-page .advisory-hero { min-height: 0; padding: 160px 0 80px; }
+.advisory-hero__layout { position: relative; z-index: 1; display: grid; gap: 48px; align-items: center; }
+.advisory-hero h1 { font-size: clamp(2.2rem, 4.5vw, 4.3rem); line-height: 1.1; letter-spacing: -0.035em; color: var(--text-heading); margin-bottom: 24px; text-wrap: balance; }
+.advisory-hero h1 span { color: var(--accent-light); }
+.advisory-eyebrow { color: var(--accent-light); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; line-height: 1.6; text-transform: uppercase; margin-bottom: 16px; }
+.advisory-lead { font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text); line-height: 1.8; margin-bottom: 24px; }
+.advisory-detail { color: var(--text-muted); line-height: 1.8; }
+.advisory-page .hero__cta-group { justify-content: flex-start; }
+.advisory-section { padding: 80px 0; }
+.advisory-section--tinted { background: linear-gradient(120deg, #06101e, var(--bg)); border-block: 1px solid var(--border); }
+.advisory-page .section-title, .advisory-page .section-subtitle { text-align: left; margin-left: 0; }
+.advisory-visual { margin: 0; min-width: 0; overflow: hidden; border: 1px solid rgba(99, 221, 255, 0.22); border-radius: var(--radius-lg); background: var(--bg-card); box-shadow: 0 20px 80px rgba(36, 91, 255, 0.12); }
+.advisory-visual img { display: block; width: 100%; height: auto; }
+.advisory-visual figcaption { padding: 14px 20px; color: var(--text-muted); font-size: 0.78rem; line-height: 1.6; border-top: 1px solid var(--border); }
+.advisory-engineering, .advisory-process { display: grid; gap: 24px; margin-top: 36px; }
+.advisory-card { padding: 28px; border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); }
+.advisory-number { color: var(--hero-neon-mid); font-size: 0.78rem; letter-spacing: 0.1em; }
+.advisory-card h3, .advisory-process h3 { color: var(--text-heading); font-size: 1.25rem; line-height: 1.4; margin: 14px 0; }
+.advisory-card p, .advisory-card li, .advisory-process p { color: var(--text-muted); line-height: 1.8; }
+.advisory-card p + p { margin-top: 16px; }
+.advisory-card ul { padding-left: 20px; margin-top: 16px; }
+.advisory-card li { margin-top: 10px; }
+.advisory-link { display: inline-block; color: var(--accent-light); line-height: 1.6; margin-top: 20px; }
+.advisory-link:hover { text-decoration: underline; }
+.advisory-process { list-style: none; padding: 0; }
+.advisory-process li { padding-top: 24px; border-top: 1px solid rgba(99, 221, 255, 0.35); }
+.advisory-page .services-grid { grid-template-columns: minmax(0, 1fr); }
+.advisory-connection { display: grid; gap: 40px; align-items: center; }
+.advisory-related { display: grid; gap: 16px; }
+.advisory-related a { display: flex; justify-content: space-between; gap: 20px; padding: 24px; border: 1px solid rgba(184, 134, 11, 0.35); border-radius: var(--radius); color: var(--accent-light); }
+.advisory-related a:hover { background: var(--bg-elevated); }
+.advisory-page [id] { scroll-margin-top: 100px; }
+.advisory-page a:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 4px; }
+@media (min-width: 768px) {
+  .advisory-page .services-grid, .advisory-process { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .advisory-hero__layout, .advisory-connection { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .advisory-engineering { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .advisory-process { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .advisory-page .container { padding-inline: 20px; }
+  .advisory-page .advisory-hero { padding: 120px 0 56px; }
+  .advisory-section { padding: 56px 0; }
+  .advisory-page .btn { white-space: normal; text-align: center; }
+  .advisory-card { padding: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.advisory-page) { scroll-behavior: auto; }
+  .advisory-page *, .advisory-page *::before, .advisory-page *::after { animation: none !important; transition: none !important; }
+  .advisory-page .hero__particles { display: none; }
+  .advisory-page .fade-in { opacity: 1; transform: none; }
+}

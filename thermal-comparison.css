@@ -1,0 +1,33 @@
+/* Full-frame comparison: reveal by clipping, never by resizing either image. */
+.aerial-page .thermal-comparison-section { padding-top: 16px; }
+.thermal-comparison__instruction { color: var(--text); font-size: .85rem; line-height: 1.7; margin-bottom: 20px; }
+.thermal-comparison__instruction span { color: var(--text-muted); margin-left: .4em; }
+.thermal-comparison { --reveal: 40%; --visible-brightness: 1; --visible-contrast: 1; --thermal-x: 0%; --thermal-y: 0%; --thermal-scale: 1; margin: 0; }
+.thermal-comparison__frame { position: relative; aspect-ratio: 1672 / 941; border: 1px solid rgba(212, 162, 76, .4); border-radius: var(--radius); background: var(--bg-card); overflow: hidden; isolation: isolate; }
+.thermal-comparison__frame img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: contain; user-select: none; -webkit-user-drag: none; }
+/* Optional exposure controls are neutral for the revised supplied image pair. */
+.thermal-comparison__visible { filter: brightness(var(--visible-brightness)) contrast(var(--visible-contrast)); }
+.thermal-comparison__overlay { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--reveal)) 0 0); visibility: hidden; pointer-events: none; }
+.thermal-comparison__thermal { transform: translate(var(--thermal-x), var(--thermal-y)) scale(var(--thermal-scale)); transform-origin: center; }
+.thermal-comparison.is-ready .thermal-comparison__overlay { visibility: visible; }
+.thermal-comparison.is-ready .thermal-comparison__frame { cursor: ew-resize; touch-action: pan-y pinch-zoom; user-select: none; }
+.thermal-comparison__label { position: absolute; z-index: 2; top: 12px; padding: 7px 10px; color: #f4e5c4; background: #06101eea; border: 1px solid #d4a24c55; border-radius: 3px; font-size: .6rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; pointer-events: none; }
+.thermal-comparison__label[hidden] { display: none; }
+.thermal-comparison__label--thermal { left: 12px; }
+.thermal-comparison__label--visible { right: 12px; }
+.thermal-comparison__divider { display: none; position: absolute; z-index: 3; top: 0; bottom: 0; left: var(--reveal); width: 1px; background: #edc67c; box-shadow: 0 0 0 1px #040c1438; pointer-events: none; }
+.thermal-comparison.is-ready .thermal-comparison__divider { display: block; }
+.thermal-comparison__handle { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 42px; height: 42px; transform: translate(-50%, -50%); border: 1px solid #edc67c; border-radius: 50%; color: #edc67c; background: #06101ef5; box-shadow: 0 3px 16px #0006; }
+/* Keep the complete handle accessible at both edges; the reveal itself reaches 0/100%. */
+.thermal-comparison.is-start .thermal-comparison__handle { transform: translate(0, -50%); }
+.thermal-comparison.is-end .thermal-comparison__handle { transform: translate(-100%, -50%); }
+.thermal-comparison__frame:focus-within { outline: 2px solid var(--accent-light); outline-offset: 5px; }
+.thermal-comparison__frame:focus-within .thermal-comparison__handle { box-shadow: 0 0 0 4px #040c14, 0 0 0 6px #edc67c; }
+.thermal-comparison figcaption { margin-top: 16px; color: var(--text-muted); font-size: .78rem; line-height: 1.6; }
+.thermal-comparison__status, .thermal-comparison__notice { font-size: .78rem; color: var(--text-muted); margin-top: 8px; }
+.thermal-comparison__status:empty { display: none; }
+.thermal-comparison__sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 639px) {
+  .thermal-comparison__instruction span { display: block; margin-left: 0; }
+  .thermal-comparison__label { font-size: .55rem; padding: 5px 8px; }
+}

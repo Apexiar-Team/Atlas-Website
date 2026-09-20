@@ -1,0 +1,53 @@
+/* Energy and Infrastructure sector additions using the existing Apexiar design system. */
+.energy-page .energy-hero { min-height: 0; padding: 160px 0 80px; }
+.energy-hero__layout { position: relative; z-index: 1; display: grid; gap: 48px; align-items: center; }
+.energy-hero h1 { color: var(--text-heading); font-size: clamp(2.2rem, 4.5vw, 4.3rem); line-height: 1.1; letter-spacing: -.035em; margin-bottom: 24px; }
+.energy-hero h1 span { color: var(--accent-light); }
+.energy-eyebrow { color: var(--accent-light); font-size: .72rem; font-weight: 700; line-height: 1.6; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 16px; }
+.energy-lead { color: var(--text); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.8; margin-bottom: 24px; }
+.energy-detail { color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
+.energy-page .hero__cta-group { justify-content: flex-start; }
+.energy-section { padding: 80px 0; }
+.energy-section--tinted { background: linear-gradient(120deg, #06101e, var(--bg)); border-block: 1px solid var(--border); }
+.energy-page .section-title, .energy-page .section-subtitle { text-align: left; margin-left: 0; }
+.energy-visual { margin: 0; min-width: 0; overflow: hidden; border: 1px solid rgba(99,221,255,.22); border-radius: var(--radius-lg); background: var(--bg-card); }
+.energy-visual img, .energy-card > img { display: block; width: 100%; height: auto; }
+.energy-visual figcaption { padding: 14px 20px; color: var(--text-muted); font-size: .78rem; line-height: 1.6; border-top: 1px solid var(--border); }
+.energy-challenges, .energy-sensors { display: grid; gap: 24px; margin-top: 36px; }
+.energy-challenges article { border-top: 1px solid rgba(99,221,255,.35); padding-top: 24px; }
+.energy-number { color: var(--hero-neon-mid); font-size: .75rem; letter-spacing: .1em; }
+.energy-challenges h3, .energy-card h3 { color: var(--text-heading); font-size: 1.3rem; line-height: 1.4; margin: 14px 0; }
+.energy-challenges p, .energy-card p { color: var(--text-muted); line-height: 1.8; }
+.energy-feature { display: grid; gap: 40px; align-items: center; }
+.energy-links { display: grid; gap: 16px; }
+.energy-links a, .energy-link, .energy-card a { color: var(--accent-light); line-height: 1.7; }
+.energy-links a { padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.energy-links a:hover, .energy-link:hover, .energy-card a:hover { text-decoration: underline; }
+.energy-card { overflow: hidden; border: 1px solid rgba(184,134,11,.3); border-radius: var(--radius-lg); background: var(--bg-card); }
+.energy-card__body { padding: 28px; }
+.energy-card .energy-status { color: var(--accent-light); text-transform: uppercase; font-size: .72rem; font-weight: 700; letter-spacing: .07em; }
+.energy-card .energy-note { margin: 20px 0; padding-left: 16px; border-left: 2px solid var(--accent-light); font-size: .85rem; }
+.energy-page [id] { scroll-margin-top: 100px; }
+.energy-page a:focus-visible { outline: 2px solid var(--accent-light); outline-offset: 4px; }
+@media (min-width: 768px) {
+  .energy-challenges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .energy-sensors { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .energy-hero__layout, .energy-feature { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .energy-page .container { padding-inline: 20px; }
+  .energy-page .energy-hero { padding: 120px 0 56px; }
+  .energy-section { padding: 56px 0; }
+  .energy-card__body { padding: 22px; }
+  .energy-page .btn { white-space: normal; text-align: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.energy-page) { scroll-behavior: auto; }
+  .energy-page *, .energy-page *::before, .energy-page *::after { animation: none !important; transition: none !important; }
+  .energy-page .hero__particles { display: none; }
+  .energy-page .fade-in { opacity: 1; transform: none; }
+}
+
+.energy-links--spaced { margin-top: 28px; }
