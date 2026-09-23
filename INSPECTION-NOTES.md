@@ -28,11 +28,13 @@ The final 60 frames before encoding are identical, giving a genuine 2.5-second h
 
 The section follows the complete operating model and original globe, before the existing Certified & Compliant strip. All unrelated homepage HTML is unchanged.
 
-Native sticky positioning, natural scrolling, paused forward/reverse seeking and no autoplay. Lazy loading and error handling are retained. Reduced motion, missing IntersectionObserver and short landscape screens show static content. The skip link advances keyboard focus to the certification strip.
+Native sticky positioning, natural scrolling, paused forward/reverse seeking and no autoplay. Lazy loading and error handling are retained. Reduced motion, missing IntersectionObserver and short landscape screens show static content. The inspection skip link was removed at the user's explicit request; normal scrolling and keyboard navigation remain available.
 
-Video remains contained. Desktop evidence is positioned to the left of the larger observation; on tablet/phone it sits below the image. Tracking coordinates are normalised to the actual rendered video rectangle. The illustrative workflow label and engineering-review caveat remain; finding wording is now Potential surface damage to match the selected illustration without diagnosing it.
+The introduction now sits in a compact navy header before the sticky stage and scrolls away naturally before scrubbing starts. Video remains contained and is aligned to the top of the media frame; tracking geometry uses the same alignment. The header height is measured and included in the scroll geometry, including after font loading or resizing. The camera-mode label is a small dark-backed overlay. Desktop evidence is positioned to the left of the larger observation; on tablet/phone it sits below the image. The illustrative workflow label and engineering-review caveat remain.
 
 ## Adjustment locations
+
+Desktop stage sizing now fits the full-width video aspect ratio plus measured caption height, capped at the available viewport. The media reserves caption space. ResizeObserver watches the caption to update the stage and tracking when the final message appears; the section uses that same stage height plus its intro and scroll travel. This removes the empty vertical band associated with the earlier unconditional viewport-height stage. Tablet/phone retain their stacked layout.
 
 - Copy, alternative text, URLs: inspection section in index.html.
 - Frame rate, cut/caption timing, scroll distance, load timeout: INSPECTION_CONFIG in inspection.js.

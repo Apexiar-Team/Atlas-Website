@@ -31,6 +31,8 @@
   };
   const video = section.querySelector('video');
   const stage = section.querySelector('.inspection__stage');
+  const intro = section.querySelector('.inspection__intro');
+  const bottom = section.querySelector('.inspection__bottom');
   const media = section.querySelector('.inspection__media');
   const marker = section.querySelector('.inspection__target');
   const tag = section.querySelector('.inspection__target-label');
@@ -39,13 +41,12 @@
   const tagPoint = section.querySelector('.inspection__tag-link circle');
   const evidencePath = section.querySelector('.inspection__evidence-link path');
   const evidencePoint = section.querySelector('.inspection__evidence-link circle');
-  const mode = section.querySelector('.inspection__mode');
+  const mode = stage.querySelector('.inspection__mode');
   const status = section.querySelector('.inspection__status');
   const evidence = section.querySelector('.inspection__evidence');
   const approach = section.querySelector('.inspection__approach');
   const closing = section.querySelector('.inspection__closing');
   const finding = section.querySelector('.inspection__finding');
-  const after = document.getElementById('after-inspection');
   const nav = document.querySelector('.navbar');
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const events = new AbortController();
@@ -70,11 +71,20 @@
   }
 
   function measureVideo() {
-    // Matches object-fit: contain and object-position: 50% 50% in inspection.css.
+    // Fit the desktop stage to the footage plus its caption, capped at the viewport.
+    // Reserve caption space so contained video cannot leave a large band above it.
+    const navHeight = parseFloat(section.style.getPropertyValue('--inspection-nav')) || 64;
+    const footerHeight = bottom.offsetHeight;
+    section.style.setProperty('--inspection-footer-height', footerHeight + 'px');
+    const stageHeight = window.innerWidth > INSPECTION_CONFIG.mobileBreakpoint
+      ? Math.min(window.innerHeight - navHeight, media.clientWidth * 902 / 1600 + footerHeight)
+      : window.innerHeight - navHeight;
+    section.style.setProperty('--inspection-stage-height', stageHeight + 'px');
+    // Matches object-fit: contain and object-position: 50% 0 in inspection.css.
     const width = video.videoWidth || 1600, height = video.videoHeight || 902;
     const scale = Math.min(media.clientWidth / width, media.clientHeight / height);
     bounds = { width: width * scale, height: height * scale,
-      left: (media.clientWidth - width * scale) / 2, top: (media.clientHeight - height * scale) / 2 };
+      left: (media.clientWidth - width * scale) / 2, top: 0 };
   }
 
   function renderLinks() {
@@ -109,7 +119,8 @@
     const t = INSPECTION_CONFIG.timeline;
     const approachOpacity = 1 - clamp((time - t.approachOut) / (t.cut - t.approachOut));
     const captureOpacity = fade(time, t.capture), closingOpacity = fade(time, t.finding);
-    section.style.setProperty('--inspection-intro', approachOpacity);
+    if (time >= t.finding) section.classList.add('is-closing');
+    else section.classList.remove('is-closing');
     section.style.setProperty('--inspection-approach', approachOpacity);
     section.style.setProperty('--inspection-target', fade(time, t.target));
     section.style.setProperty('--inspection-evidence', captureOpacity);
@@ -185,8 +196,9 @@
     raf = 0;
     if (!active) return;
     const top = parseFloat(section.style.getPropertyValue('--inspection-nav')) || 64;
-    const travel = Math.max(1, section.offsetHeight - stage.offsetHeight);
-    const progress = clamp((top - section.getBoundingClientRect().top) / travel);
+    const introHeight = intro.offsetHeight;
+    const travel = Math.max(1, section.offsetHeight - introHeight - stage.offsetHeight);
+    const progress = clamp((top - section.getBoundingClientRect().top - introHeight) / travel);
     // Exact frame mapping: no easing tail or playback after scrolling stops.
     desiredTime = Math.min(duration, Math.floor(progress * duration * INSPECTION_CONFIG.fps + .0001) / INSPECTION_CONFIG.fps);
     seek(desiredTime);
@@ -206,6 +218,7 @@
   function layout() {
     const navHeight = nav ? Math.ceil(nav.getBoundingClientRect().height) : 64;
     section.style.setProperty('--inspection-nav', navHeight + 'px');
+    section.style.setProperty('--inspection-intro-height', intro.offsetHeight + 'px');
     const screens = window.innerWidth <= INSPECTION_CONFIG.mobileBreakpoint ? INSPECTION_CONFIG.scrollScreens.mobile : INSPECTION_CONFIG.scrollScreens.desktop;
     section.style.setProperty('--inspection-travel', screens * 100 + 'svh');
     if (!('IntersectionObserver' in window) || motion.matches || window.innerHeight < INSPECTION_CONFIG.minimumHeight) { fallback(''); return; }
@@ -250,13 +263,6 @@
   listen(window, 'resize', layout, { passive: true });
   listen(motion, 'change', layout);
   listen(document, 'visibilitychange', () => { if (!document.hidden) schedule(); });
-  // The skip link must also move keyboard focus, without replaying the sequence.
-  listen(section.querySelector('.inspection__skip'), 'click', event => {
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    after.focus({ preventScroll: true });
-    after.scrollIntoView({ behavior: 'instant', block: 'start' });
-  });
   listen(window, 'pagehide', event => {
     if (event.persisted) { cancelSeek(); return; }
     active = false;
@@ -265,6 +271,7 @@
     clearTimeout(loadTimer);
     observer?.disconnect();
     resizeObserver?.disconnect();
+    introObserver?.disconnect();
     events.abort();
   });
   listen(window, 'pageshow', event => { if (event.persisted) layout(); });
@@ -272,6 +279,12 @@
   resizeObserver?.observe(media);
   resizeObserver?.observe(evidence);
   resizeObserver?.observe(tag);
+  resizeObserver?.observe(bottom);
+  const introObserver = 'ResizeObserver' in window ? new ResizeObserver(() => {
+    section.style.setProperty('--inspection-intro-height', intro.offsetHeight + 'px');
+    schedule();
+  }) : null;
+  introObserver?.observe(intro);
   if (!('IntersectionObserver' in window)) return; // Static, usable no-observer fallback.
   observer = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) load(); }, { rootMargin: '100% 0px' });
   video.muted = true;

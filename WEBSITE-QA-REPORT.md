@@ -1,6 +1,6 @@
 # Apexiar restructure: QA and content disposition
 
-20 September 2026. User approved the current site and explicitly authorised commit/push to main for production. Release checks passed; site commit 4c1543f is pushed to main. Production activation is not yet confirmed. Remaining device/accessibility/consent follow-ups are documented below.
+23 September 2026. User approved the current site and explicitly authorised commit/push to main for production. Release checks passed; site commit 4c1543f is pushed to main and verified live. Remaining device/accessibility/consent follow-ups are documented below.
 
 ## Changed in Phase 6
 
@@ -75,7 +75,7 @@ No original product, service, article, testimonial, image or video content was d
 2. **Consent validation:** consent.js/consent.css now gate Analytics behind acceptance, store apexiar_consent, and expose footer settings. Policy implementation notes were added. The user verified banner display and acceptance. Rejection, persistence, withdrawal, network blocking and mobile/tablet behaviour still need validation; do not treat acceptance alone as complete consent QA.
 3. **Brochures:** Atlas and Assure PDFs remain unavailable. The site now offers a working enquiry route instead of a failed download.
 4. **Contact delivery verified by user:** the user submitted an enquiry and confirmed receipt at the company email. Existing Web3Forms delivery therefore has user-verified end-to-end evidence. No CRM integration or source-tagging schema is configured; any additional CRM requirement remains unconfirmed.
-5. **Evidence and deployment:** existing statistics/certification wording was preserved without increasing claims. Confirm evidence/current scope as needed. Hosting access/process and production redirect behaviour remain unverified; deployment requires a separate instruction.
+5. **Evidence and hosting operations:** existing statistics/certification wording was preserved without increasing claims. Confirm evidence/current scope as needed. The approved site is verified live through Amazon S3/CloudFront, but the authenticated hosting administration process remains undocumented in this repository.
 
 Existing housekeeping observations remain: `.gitignore` contains null bytes, and the Atom brochure is approximately 23.7 MB. Neither file was silently replaced or deleted during the restructure.
 
@@ -259,3 +259,47 @@ All 30 page headers now offer direct capability dropdowns on desktop and mobile.
 - Committed the approved site as 4c1543f38cfaa623d659863ba1cd2dc88868ab89 and fast-forwarded/pushed origin/main successfully. No force push. Local main and origin/main matched; working tree was clean.
 - HTTPS verification after push: www.apexiar.co.uk returned 200 with the old homepage; aerial-intelligence.html returned 404. Public GitHub commit status was pending with no check runs, deployments or Actions runs reported. This does not establish a hosting failure, but the new site is not yet verified live.
 - Repository includes vercel.json, but no authenticated hosting CLI/session or deployment credentials are available here; GitHub CLI is not authenticated. Next step: inspect the hosting project connected to Apexiar-Team/Atlas-Website, confirm production branch main and deploy commit 4c1543f. Existing domain/DNS configuration was not changed.
+
+### Production activation verified
+
+- Rechecked production on 23 September 2026. The restructured homepage is live at `https://www.apexiar.co.uk/`.
+- HTTPS HEAD checks returned 200 for the homepage, capabilities overview, all four capability pages, all three sector pages and `assets/media/apexiar-turbine-inspection.mp4`.
+- All nine checked HTML production objects exactly matched their local `main` counterparts after expected CRLF-to-LF normalisation: deployed content lengths equalled normalised local lengths and S3 ETags equalled normalised local MD5 hashes. The inspection MP4 returned 200, advertised byte-range support and matched the local 13,805,629-byte length; its multipart S3 ETag is not treated as a content hash.
+- Response headers identify Amazon S3 behind CloudFront. No hosting setting, DNS, application code or dependency was changed. Deployment activation is resolved; keyboard-only, reduced-motion, consent rejection/persistence/withdrawal, 320px and physical-device/Safari coverage remain open.
+
+### Homepage capability heading and callout
+
+- Updated the homepage capability heading to "Connected Technology Ecosystems" and added a dedicated class to the existing supporting sentence.
+- The callout copies the established Pause Video visual values: `#06101e` background, `#d4a24c` one-pixel border, `#f1d397` text, 6px radius and 10px/16px padding. It remains a semantic paragraph, not a misleading interactive control.
+- Capability cards, links, imagery, particles and protected homepage sections remain unchanged. No dependency, asset, route, commit or deployment change.
+- Verification passed: 13 existing Node tests, `node --check script.js`, exact heading/class checks and `git diff --check`. Local Edge renders at 1440 x 4000, 768 x 4000 and 390 x 5000 included the full capability section; heading and callout fit at all three widths, the callout stacks cleanly at tablet/mobile sizes and the four-card layouts remain intact. Computer Use exposed no browser, so the rendered fallback used installed Edge headless against the existing local preview. Temporary screenshots were removed after inspection.
+- Follow-up: changed only the Advisory & Deployment homepage-card description to "Practical expertise from engineering strategy to assurance." Image, heading, destination and layout markup remain unchanged. The user requested manual visual review, so no additional rendered browser check was performed; exact-copy, preservation and whitespace checks passed.
+
+### End-of-day release — 23 September 2026
+
+- User authorised committing and pushing all current homepage refinements to main. Final suite: 21/21 tests passed; script.js and inspection.js syntax and Git whitespace passed. No build/lint commands configured. Local main matched freshly fetched origin/main before commit. Visual review remained with user; production activation of this new release is not yet verified.
+
+### Assurance strip and synchronised counters (implementation)
+
+- Homepage assurance label now uses the existing gold border/text/navy treatment; three 48px-high badges sit underneath. Added byte-identical supplied RISQS.png; original badges retained. Statistics preserve all final values and use one shared two-second clock, including 99.9% at one decimal. Reduced-motion and no-observer fallbacks show final values.
+- Three new behaviour tests verify shared completion, different rates, no early final value/replay and motion fallbacks. All 21 project tests passed, alongside script syntax, Git whitespace, 101 local references, four local HTTP checks and source/copy SHA256 equality. No configured build/lint scripts; manual visual review remains with user. No commit/deployment.
+
+### Inspection introduction layout refinement (earlier work)
+
+- Remaining-gap correction: user screenshot showed viewport-stage letterboxing above the footer after the padding fix. Desktop stage now fits footage plus measured footer, capped to the available viewport, with matching section height and reserved media/footer space. Added geometry regression for tall/short viewports and changing caption heights. All 18 tests, syntax and whitespace passed. These are automated geometry checks; user visual review remains pending.
+
+- Closing-panel follow-up: compact 16px vertical padding, 10px workflow spacing, and a closing-state layout that removes the faded approach copy's reserved space. Existing timeline regression test now asserts closing-state entry and reversal. All 17 tests, inspection JavaScript syntax and Git whitespace passed; no rendered review per user preference. This adjusts the caption panel, not the pinned-stage height or contained-video aspect ratio.
+
+- Width follow-up: removed the two intro text width caps to use the available container width. Desktop copy can occupy one line per element; responsive wrapping is retained. Manual visual review remains with the user.
+
+- Moved the introduction above the sticky stage onto solid navy; removed the inspection skip control/handler/styles as requested. Top-aligned the contained footage, updated tracking coordinates and offset the scroll timeline by the measured introduction height. The existing horizon, footage and gold evidence treatment remain intact.
+- All 17 tests passed, including eight inspection checks covering header scroll timing, forward/reverse seeking, desktop/tablet/mobile marker geometry, final hold, loading failures and reduced motion. JavaScript syntax and Git whitespace passed. No build/lint scripts configured; rendered layout review is assigned to the user per their instruction. No commit or deployment.
+
+### Operating-model sequential pulse (earlier work)
+
+- Added progressive-enhancement classes and a dedicated IntersectionObserver to pulse the timeline purple once, in order from Sense through Act, when 20% of the timeline enters the viewport. CSS delays are 420ms per step; each node/line pulse lasts 800ms and Act settles to its pre-existing purple state.
+- Missing IntersectionObserver, disabled JavaScript and reduced-motion retain the original static presentation. A live reduced-motion preference change disconnects the observer, cancels enhancement classes and restores the static state.
+- Timeline HTML/copy, responsive grids and the globe/horizon are unchanged. The user requested manual visual review, so no desktop takeover or rendered browser check was performed.
+- Added three focused VM tests covering one-time viewport entry, non-intersecting state, reduced-motion/missing-observer fallbacks and live motion-preference cancellation. All 16 project tests passed, as did `node --check script.js`, local homepage/script/CSS HTTP checks and `git diff --check`.
+- Timing follow-up: increased both the pulse duration and step delay by exactly 50% (`.8s` to `1.2s`; `.42s` to `.63s`). The sequence still runs Sense / Connect / Understand / Act once and settles on Act. No rendered browser check was requested.
+- Colour follow-up: changed the travelling neon and final Act node from purple to the homepage's existing gold palette. Inactive nodes remain blue; timing and JavaScript are unchanged. No rendered browser check was requested.

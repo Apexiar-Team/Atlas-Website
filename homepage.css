@@ -34,6 +34,7 @@
 .home-section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 36px; margin-bottom: 30px; }
 .home-section-heading h2, .home-section-title { color: var(--text-heading); font-size: clamp(1.65rem, 2.5vw, 2.5rem); line-height: 1.2; letter-spacing: -.025em; }
 .home-section-heading > p { max-width: 315px; font-size: .85rem; line-height: 1.7; color: #a9becd; }
+.home-section-heading > .home-capability-summary { max-width: 340px; padding: 10px 16px; color: #f1d397; background: #06101e; border: 1px solid #d4a24c; border-radius: 6px; }
 .home-capability-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 .home-capability { position: relative; display: flex; min-height: 270px; border: 1px solid #486779; border-radius: 9px; overflow: hidden; background: #07131e; }
 .home-capability > img { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: .52; }
@@ -48,12 +49,36 @@
 .home-flow, .home-delivery { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin: 42px 0 0; }
 .home-flow li { border-top: 1px solid #256c96; padding-top: 24px; position: relative; }
 .home-flow li::before { content: ''; position: absolute; left: 0; top: -6px; width: 11px; height: 11px; border: 2px solid #72cbff; border-radius: 50%; background: #2174ba; box-shadow: 0 0 15px #268fde; }
-.home-flow li:last-child::before { border-color: #b392ee; background: #6442b5; box-shadow: 0 0 15px #774bd0; }
+.home-flow li:last-child::before { border-color: #f0cd87; background: #ba8b3d; box-shadow: 0 0 15px #d4a24c; }
+.home-flow li:nth-child(1) { --home-flow-step: 0; }
+.home-flow li:nth-child(2) { --home-flow-step: 1; }
+.home-flow li:nth-child(3) { --home-flow-step: 2; }
+.home-flow li:nth-child(4) { --home-flow-step: 3; }
+.home-flow--pulse-ready li:last-child::before { border-color: #72cbff; background: #2174ba; box-shadow: 0 0 15px #268fde; }
+.home-flow--pulse-active li { animation: home-flow-line-pulse 1.2s ease-in-out calc(var(--home-flow-step) * .63s) both; }
+.home-flow--pulse-active li::before { animation: home-flow-node-pulse 1.2s ease-in-out calc(var(--home-flow-step) * .63s) both; }
+.home-flow--pulse-active li:last-child::before { animation-name: home-flow-node-pulse-settle; }
+@keyframes home-flow-line-pulse {
+  0%, 100% { border-top-color: #256c96; box-shadow: none; }
+  45% { border-top-color: #edc67c; box-shadow: 0 -1px 16px rgba(212, 162, 76, .75); }
+}
+@keyframes home-flow-node-pulse {
+  0%, 100% { border-color: #72cbff; background: #2174ba; box-shadow: 0 0 15px #268fde; transform: scale(1); }
+  45% { border-color: #fff0c7; background: #d4a24c; box-shadow: 0 0 8px #f0cd87, 0 0 24px #d4a24c, 0 0 42px rgba(186, 139, 61, .8); transform: scale(1.35); }
+}
+@keyframes home-flow-node-pulse-settle {
+  0% { border-color: #72cbff; background: #2174ba; box-shadow: 0 0 15px #268fde; transform: scale(1); }
+  45% { border-color: #fff0c7; background: #d4a24c; box-shadow: 0 0 8px #f0cd87, 0 0 24px #d4a24c, 0 0 42px rgba(186, 139, 61, .8); transform: scale(1.35); }
+  100% { border-color: #f0cd87; background: #ba8b3d; box-shadow: 0 0 15px #d4a24c; transform: scale(1); }
+}
 .home-flow h3 { color: #e8f4ff; text-transform: uppercase; letter-spacing: .12em; font-size: 1rem; margin-bottom: 14px; }
 .home-flow p, .home-delivery p { color: #a9becd; line-height: 1.75; font-size: .9rem; }
 .home-assurance { padding: 32px 0; background: #050d17; }
-.home-page .home-assurance .hero__trust-strip { margin: 0; padding: 0; border: 0; flex-direction: row; justify-content: center; gap: 36px; }
-.home-page .hero__trust-label { color: #adc0cd; }
+.home-page .home-assurance .hero__trust-strip { margin: 0; padding: 0; border: 0; flex-direction: column; justify-content: center; gap: 20px; }
+.home-page .home-assurance .hero__trust-label { padding: 10px 16px; color: #f1d397; background: #06101e; border: 1px solid #d4a24c; border-radius: 6px; text-align: center; }
+.home-page .home-assurance .hero__trust-badges { justify-content: center; gap: 24px; }
+.home-page .home-assurance .hero__trust-badge { height: 48px; width: auto; object-fit: contain; }
+.home-page .about__stat-number { font-variant-numeric: tabular-nums; }
 .home-page .about { background: #060f19; }
 .home-sector-section { background: #07121e; border-block: 1px solid rgba(149,183,203,.15); }
 .home-sector-grid, .home-technology-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 36px; }

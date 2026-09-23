@@ -147,6 +147,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const animateHomepage = () => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (motion.matches || !('IntersectionObserver' in window)) return;
+    const homeFlow = document.querySelector('.home-flow');
+    let flowObserver = null;
+    if (homeFlow) {
+      homeFlow.classList.add('home-flow--pulse-ready');
+      flowObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          homeFlow.classList.add('home-flow--pulse-active');
+          flowObserver.unobserve(homeFlow);
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -12% 0px' });
+      flowObserver.observe(homeFlow);
+    }
     const groups = [
       '.home-section-heading', '.home-capability-grid > a',
       '.home-operating .home-eyebrow', '.home-operating h2', '.home-flow > li',
@@ -179,7 +192,12 @@ document.addEventListener('DOMContentLoaded', () => {
       element.addEventListener('focusin', () => reveal(element));
     });
     motion.addEventListener('change', event => {
-      if (event.matches) { targets.forEach(reveal); observer.disconnect(); }
+      if (event.matches) {
+        targets.forEach(reveal);
+        observer.disconnect();
+        flowObserver?.disconnect();
+        homeFlow?.classList.remove('home-flow--pulse-ready', 'home-flow--pulse-active');
+      }
     });
   };
 
@@ -273,34 +291,43 @@ document.addEventListener('DOMContentLoaded', () => {
     ? Array.from(aboutStatsSection.querySelectorAll('[data-counter-end]'))
     : [];
 
-  if (aboutStatsSection && counterElements.length > 0) {
+  if (aboutStatsSection && counterElements.length > 0 && !reducedMotion && 'IntersectionObserver' in window) {
     let countersStarted = false;
+    let counterFrame = 0;
+    const counterMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const counterTargets = counterElements.map((element) => ({
+      element,
+      endValue: Number(element.dataset.counterEnd || '0'),
+      decimals: Number(element.dataset.counterDecimals || '0'),
+      suffix: element.dataset.counterSuffix || ''
+    }));
+    const showFinalValues = () => counterTargets.forEach(({ element, endValue, decimals, suffix }) => {
+      element.textContent = endValue.toFixed(decimals) + suffix;
+    });
 
     const runCounters = () => {
-      const counterDurationMs = 1800;
-      const counterTargets = counterElements.map((element) => ({
-        element,
-        endValue: Number(element.dataset.counterEnd || '0'),
-        suffix: element.dataset.counterSuffix || ''
-      }));
+      const counterDurationMs = 2000;
       const startTime = performance.now();
+      counterTargets.forEach(({ element, decimals, suffix }) => {
+        element.textContent = (0).toFixed(decimals) + suffix;
+      });
 
       const updateCounters = (currentTime) => {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / counterDurationMs, 1);
-        const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-        counterTargets.forEach(({ element, endValue, suffix }) => {
-          const currentValue = Math.round(endValue * easedProgress);
-          element.textContent = `${currentValue}${suffix}`;
+        counterTargets.forEach(({ element, endValue, decimals, suffix }) => {
+          const scale = 10 ** decimals;
+          const finalUnits = Math.round(endValue * scale);
+          const units = progress < 1 ? Math.min(finalUnits - 1, Math.floor(finalUnits * progress)) : finalUnits;
+          element.textContent = (units / scale).toFixed(decimals) + suffix;
         });
 
         if (progress < 1) {
-          window.requestAnimationFrame(updateCounters);
+          counterFrame = window.requestAnimationFrame(updateCounters);
         }
       };
 
-      window.requestAnimationFrame(updateCounters);
+      counterFrame = window.requestAnimationFrame(updateCounters);
     };
 
     const counterObserver = new IntersectionObserver((entries) => {
@@ -318,6 +345,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     counterObserver.observe(aboutStatsSection);
+    counterMotion.addEventListener('change', event => {
+      if (!event.matches) return;
+      countersStarted = true;
+      window.cancelAnimationFrame(counterFrame);
+      counterObserver.disconnect();
+      showFinalValues();
+    });
   }
 
   // --- Globe constellation dots ---

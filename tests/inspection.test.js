@@ -24,13 +24,16 @@ function harness({ width = 1440, height = 900, reduced = false, io = true, frame
     focus() { this.focused = true; }
     scrollIntoView(o) { this.scrolled = o; }
   }
-  const section = new Element(), video = new Element(), stage = new Element(), media = new Element();
-  const classes = ['target', 'target-label', 'links', 'tag-link path', 'tag-link circle', 'evidence-link path', 'evidence-link circle', 'mode', 'status', 'evidence', 'approach', 'closing', 'finding', 'skip'];
+  const section = new Element(), video = new Element(), stage = new Element(), media = new Element(), intro = new Element();
+  intro.offsetHeight = 240;
+  const classes = ['target', 'target-label', 'links', 'tag-link path', 'tag-link circle', 'evidence-link path', 'evidence-link circle', 'mode', 'status', 'evidence', 'approach', 'closing', 'finding', 'bottom'];
   const elements = Object.fromEntries(classes.map(k => ['.inspection__' + k, new Element()]));
-  Object.assign(elements, { video, '.inspection__stage': stage, '.inspection__media': media });
+  elements['.inspection__bottom'].offsetHeight = 100;
+  Object.assign(elements, { video, '.inspection__stage': stage, '.inspection__media': media, '.inspection__intro': intro });
   section.querySelector = key => elements[key];
+  stage.querySelector = key => elements[key];
   stage.offsetHeight = height - 64;
-  section.offsetHeight = stage.offsetHeight + height * (width <= 900 ? 1.25 : 2);
+  section.offsetHeight = intro.offsetHeight + stage.offsetHeight + height * (width <= 900 ? 1.25 : 2);
   const after = new Element(), motion = new Element(), win = new Element(), doc = new Element();
   motion.matches = reduced;
   Object.assign(win, { innerWidth: width, innerHeight: height, matchMedia: () => motion });
@@ -49,10 +52,10 @@ function harness({ width = 1440, height = 900, reduced = false, io = true, frame
     setTimeout: (cb, delay) => { timers.set(++timerId, { cb, delay }); return timerId; }, clearTimeout: id => timers.delete(id) };
   vm.runInNewContext(source, context);
   const flush = () => { let count = 0; while (queue.length) { assert(count++ < 30, 'must not run an endless frame loop'); const batch = queue; queue = []; batch.forEach(cb => cb()); } };
-  const scroll = p => { section.top = 64 - p * (section.offsetHeight - stage.offsetHeight); win.emit('scroll'); flush(); };
+  const scroll = p => { section.top = 64 - intro.offsetHeight - p * (section.offsetHeight - intro.offsetHeight - stage.offsetHeight); win.emit('scroll'); flush(); };
   const ready = () => { observed.cb([{ isIntersecting: true }]); video.emit('loadedmetadata'); video.emit('loadeddata'); flush(); };
   const finish = () => { video.seeking = false; if (pendingFrame) { const cb = pendingFrame; pendingFrame = null; cb(0, { mediaTime: current }); } video.emit('seeked'); flush(); };
-  return { section, video, elements, media, after, win, motion, timers, requests, scroll, ready, finish, flush, observed };
+  return { section, intro, video, elements, media, after, win, motion, timers, requests, scroll, ready, finish, flush, observed };
 }
 
 test('lazy loading, forward/reverse, hold, clamped last frame and serialized rapid seeks', () => {
@@ -83,6 +86,8 @@ test('contained-video marker remains within rendered image at desktop/tablet/mob
     const y = parseFloat(h.elements['.inspection__target'].style.top);
     const w = parseFloat(h.elements['.inspection__target'].style.width), hh = parseFloat(h.elements['.inspection__target'].style.height);
     assert(x >= 0 && x + w <= width); assert(y >= 0 && y + hh <= mediaHeight);
+    const scale = Math.min(width / 1600, mediaHeight / 902);
+    assert(Math.abs(y - .15 * 902 * scale) < .001, 'marker follows top-aligned footage');
     assert.equal(h.section.values['--inspection-travel'], width <= 900 ? '125svh' : '200svh');
   }
 });
@@ -96,9 +101,11 @@ test('approved edit changes view at four seconds, then holds its final marker an
   h.scroll(8.4 / (10 - 1 / 24)); h.finish();
   assert.equal(h.elements['.inspection__evidence'].attrs['aria-hidden'], 'false');
   assert.equal(h.elements['.inspection__closing'].attrs['aria-hidden'], 'false');
+  assert(h.section.classes.has('is-closing'));
   const box = () => ['left','top','width','height'].map(k => h.elements['.inspection__target'].style[k]);
   const held = box(); h.scroll(.999); h.finish(); assert.deepEqual(box(), held);
   h.scroll(.45); h.finish(); assert.notDeepEqual(box(), held);
+  assert(!h.section.classes.has('is-closing'));
   assert.equal(h.elements['.inspection__evidence'].attrs['aria-hidden'], 'true');
 });
 
@@ -111,13 +118,34 @@ test('reduced motion, small landscape and missing observer do not load or pin', 
   assert(!h.section.classes.has('is-interactive')); assert(h.video.paused);
 });
 
-test('slow loading and errors fall back without trapping scrolling; skip moves focus', () => {
+test('slow loading and errors fall back without trapping scrolling', () => {
   const h = harness(); h.observed.cb([{ isIntersecting: true }]);
   [...h.timers.values()].find(t => t.delay === 25000).cb();
   assert(!h.section.classes.has('is-interactive')); h.win.emit('resize'); assert(!h.section.classes.has('is-interactive'));
   const k = harness(); k.ready(); k.video.emit('error'); assert(!k.section.classes.has('is-interactive'));
-  k.elements['.inspection__skip'].emit('click', { preventDefault() {}, stopImmediatePropagation() {} });
-  assert(k.after.focused); assert.equal(k.after.scrolled.behavior, 'instant');
+});
+
+test('footage stays on its first frame while the introduction scrolls away', () => {
+  const h = harness(); h.ready();
+  h.section.top = 64;
+  h.win.emit('scroll'); h.flush();
+  assert.equal(h.video.currentTime, 0);
+  h.section.top = 64 - h.intro.offsetHeight / 2;
+  h.win.emit('scroll'); h.flush();
+  assert.equal(h.video.currentTime, 0);
+  h.scroll(.5); h.finish();
+  assert(h.video.currentTime > 4.9 && h.video.currentTime < 5);
+});
+
+test('desktop stage fits video and caption on tall screens and remains viewport-capped', () => {
+  for (const height of [900, 1800]) {
+    const h = harness({ width: 1440, height }); h.ready();
+    assert.equal(parseFloat(h.section.values['--inspection-stage-height']), Math.min(height - 64, 1440 * 902 / 1600 + 100));
+    assert.equal(h.section.values['--inspection-footer-height'], '100px');
+    h.elements['.inspection__bottom'].offsetHeight = 80;
+    h.win.emit('resize');
+    assert.equal(parseFloat(h.section.values['--inspection-stage-height']), Math.min(height - 64, 1440 * 902 / 1600 + 80));
+  }
 });
 
 test('page exit cleans up listeners, observers and timers', () => {
