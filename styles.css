@@ -31,6 +31,8 @@
 }
 
 :root {
+  /* One responsive scale for page hero headings, including accent lines. */
+  --hero-heading-size: clamp(2rem, 4.5vw, 3.8rem);
   --bg: #0a0a0f;
   --bg-card: #12121a;
   --bg-elevated: #1a1a26;
@@ -652,7 +654,7 @@ img { max-width: 100%; }
 }
 
 .hero__title {
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  font-size: var(--hero-heading-size);
   font-weight: 900;
   line-height: 1.08;
   letter-spacing: -0.03em;
@@ -3856,7 +3858,7 @@ a.blog-card {
 }
 
 .blog-article-hero h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: var(--hero-heading-size);
   font-weight: 800;
   color: var(--text-heading);
   line-height: 1.2;
@@ -4246,3 +4248,6 @@ a.blog-card {
   font-weight: 700;
   line-height: 1.55;
 }
+
+/* Page titles share the hero scale; section headings retain their own size. */
+h1.section-title { font-size: var(--hero-heading-size); }

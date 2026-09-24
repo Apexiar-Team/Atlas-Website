@@ -1,0 +1,128 @@
+<div id="apexiar-atmosphere-concept">
+  <div class="viz-controls">
+    <label class="form-label" for="apexiar-scroll-preview">Scroll preview <output id="apexiar-scroll-value">40%</output></label>
+    <input class="form-range" id="apexiar-scroll-preview" type="range" min="0" max="100" value="40" step="1" aria-label="Preview the background as the section scrolls into view">
+  </div>
+  <section class="apx-scene" aria-label="Apexiar atmospheric survey background concept">
+    <canvas class="apx-atmosphere" aria-hidden="true"></canvas>
+    <div class="apx-shade" aria-hidden="true"></div>
+    <div class="apx-content">
+      <p class="apx-eyebrow">Platform and development</p>
+      <h2>Operational today.<br>Engineering what comes next.</h2>
+      <div class="apx-panels">
+        <article class="apx-panel">
+          <p class="apx-status">Gen 1 / Operational configuration</p>
+          <h3>Visual and thermal inspection.</h3>
+          <p>The DJI Matrice 400 and Zenmuse H30T multi-sensor payload combine with Apexiar-integrated sensing and secure data-transfer architecture to support high-resolution visual, thermal and remote infrastructure inspection.</p>
+        </article>
+        <article class="apx-panel apx-panel-gold">
+          <p class="apx-status">Gen 2 / Engineering development</p>
+          <h3>Advancing the mission-specific system.</h3>
+          <p>Development is progressing across payload integration, onboard processing, communications and sensing for specific operational needs. Gen 2 is in engineering development.</p>
+        </article>
+      </div>
+      <p class="apx-roadmap"><strong>Long-term direction:</strong> design, development and manufacture of Apexiar UAV systems in South Wales, shaped for rail, national infrastructure and emergency response.</p>
+    </div>
+    <div class="apx-foot"><span>Atmosphere → survey → connected evidence</span><span>Background concept</span></div>
+  </section>
+</div>
+<style>
+  #apexiar-atmosphere-concept .viz-controls { margin-bottom: 14px; }
+  #apexiar-atmosphere-concept .apx-scene { --apx-gold: #edc67c; position: relative; overflow: hidden; isolation: isolate; background: #102637; color: #f4f7fa; font-family: Inter, system-ui, sans-serif; }
+  #apexiar-atmosphere-concept .apx-atmosphere, #apexiar-atmosphere-concept .apx-shade { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  #apexiar-atmosphere-concept .apx-shade { background: linear-gradient(90deg, #06111a78, transparent 90%), linear-gradient(0deg, #05101d 0%, transparent 24%, transparent 88%, #0a182630); }
+  #apexiar-atmosphere-concept .apx-content { position: relative; z-index: 1; padding: 54px 32px 110px; }
+  #apexiar-atmosphere-concept .apx-eyebrow { color: var(--apx-gold); font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; margin: 0 0 20px; }
+  #apexiar-atmosphere-concept h2 { margin: 0 0 38px; max-width: 680px; font-size: clamp(28px, 4.5vw, 40px); line-height: 1.13; font-weight: 750; letter-spacing: -.035em; text-shadow: 0 2px 30px #00101f; }
+  #apexiar-atmosphere-concept .apx-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  #apexiar-atmosphere-concept .apx-panel { background: #0a1b2bed; border: 1px solid #73c5e45e; border-top: 2px solid #82dfff; border-radius: 12px; padding: 22px; box-shadow: 0 18px 36px #02080e40; }
+  #apexiar-atmosphere-concept .apx-panel-gold { background: #15212ced; border-color: #ae94545e; border-top-color: var(--apx-gold); }
+  #apexiar-atmosphere-concept .apx-status { font-size: 11px; font-weight: 700; color: #89e4ff; line-height: 1.6; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 12px; }
+  #apexiar-atmosphere-concept .apx-panel-gold .apx-status { color: var(--apx-gold); }
+  #apexiar-atmosphere-concept h3 { margin: 0 0 14px; font-size: 17px; line-height: 1.35; font-weight: 650; }
+  #apexiar-atmosphere-concept .apx-panel > p:last-child { margin: 0; font-size: 13px; line-height: 1.8; color: #bfceda; }
+  #apexiar-atmosphere-concept .apx-roadmap { margin: 24px 0 0; padding: 12px 16px; border-left: 2px solid var(--apx-gold); background: #081727d9; font-size: 12px; line-height: 1.8; color: #bfceda; }
+  #apexiar-atmosphere-concept .apx-roadmap strong { color: #f4f7fa; }
+  #apexiar-atmosphere-concept .apx-foot { position: absolute; z-index: 1; bottom: 20px; left: 32px; right: 32px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: #a7c6d7; font-size: 11px; letter-spacing: .04em; }
+  @media (max-width: 540px) {
+    #apexiar-atmosphere-concept .apx-content { padding: 36px 20px 100px; }
+    #apexiar-atmosphere-concept .apx-panels { grid-template-columns: 1fr; }
+    #apexiar-atmosphere-concept .apx-panel { padding: 20px; }
+    #apexiar-atmosphere-concept .apx-foot { left: 20px; right: 20px; }
+  }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('apexiar-atmosphere-concept');
+  const scene = root.querySelector('.apx-scene');
+  const canvas = root.querySelector('canvas');
+  const slider = root.querySelector('input');
+  const output = root.querySelector('output');
+  const ctx = canvas.getContext('2d');
+  const saved = window.openai?.widgetState?.modelContent;
+  const state = { progress: Number.isFinite(saved?.progress) ? saved.progress : 40, light: 1, gold: '#edc67c' };
+  const mist = document.createElement('canvas');
+  mist.width = 320; mist.height = 220;
+  const mistContext = mist.getContext('2d');
+  const pixels = mistContext.createImageData(mist.width, mist.height);
+  const mix = (a, b, t) => a * (1 - t) + b * t;
+  const smooth = t => t * t * (3 - 2 * t);
+  const hash = (x, y) => { const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); };
+  function noise(x, y) {
+    const a = Math.floor(x), b = Math.floor(y), u = smooth(x - a), v = smooth(y - b);
+    return mix(mix(hash(a,b),hash(a+1,b),u),mix(hash(a,b+1),hash(a+1,b+1),u),v);
+  }
+  for (let y = 0; y < mist.height; y++) for (let x = 0; x < mist.width; x++) {
+    let value = 0, amp = .58, freq = .019;
+    for (let octave = 0; octave < 5; octave++) { value += noise(x * freq, y * freq) * amp; amp *= .5; freq *= 2.07; }
+    const alpha = Math.max(0, Math.min(1, (value - .3) * 2.2));
+    const offset = (y * mist.width + x) * 4;
+    pixels.data[offset] = 124 + value * 62;
+    pixels.data[offset+1] = 166 + value * 47;
+    pixels.data[offset+2] = 193 + value * 44;
+    pixels.data[offset+3] = alpha * 220;
+  }
+  mistContext.putImageData(pixels, 0, 0);
+  function render() {
+    const w = Math.max(1, scene.clientWidth), h = Math.max(1, scene.clientHeight), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    const p = Math.max(0, Math.min(1, state.progress / 100));
+    slider.value = state.progress; output.value = Math.round(state.progress) + '%';
+    scene.style.setProperty('--apx-gold', state.gold);
+    const sky = ctx.createLinearGradient(0,0,w,h);
+    sky.addColorStop(0,'#173247'); sky.addColorStop(.55,'#214b66'); sky.addColorStop(1,'#10243b');
+    ctx.fillStyle = sky; ctx.fillRect(0,0,w,h);
+    const bloom = ctx.createRadialGradient(w*.84,h*.12,0,w*.84,h*.12,w*.85);
+    bloom.addColorStop(0,`rgba(154,218,245,${.42 * state.light})`); bloom.addColorStop(.5,'rgba(54,153,207,.14)'); bloom.addColorStop(1,'rgba(54,153,207,0)');
+    ctx.fillStyle=bloom;ctx.fillRect(0,0,w,h);
+    const terrain = (u,v) => ({ x:w*(.5+(u-.5)*(.35+v*.95)), y:h*(.13+v*.88)-Math.sin(u*8+v*5)*h*.04*(.3+v) });
+    ctx.save();ctx.globalAlpha=.13+p*.75;
+    ctx.strokeStyle='#75c8e8';ctx.lineWidth=.65;
+    for(let j=0;j<25;j++){
+      ctx.beginPath();for(let i=0;i<=72;i++){const q=terrain(i/72,j/24);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);}ctx.stroke();
+    }
+    ctx.strokeStyle='#63bada55';
+    for(let i=0;i<40;i++){ctx.beginPath();for(let j=0;j<=48;j++){const q=terrain(i/39,j/48);j?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y);}ctx.stroke();}
+    ctx.fillStyle='#b7ecff';
+    for(let i=0;i<40;i++)for(let j=0;j<25;j++){const q=terrain(i/39,j/24);ctx.globalAlpha=(.18+p*.7)*(.4+hash(i,j)*.6);ctx.fillRect(q.x,q.y,1.4,1.4);}
+    ctx.globalAlpha=Math.max(0,(p-.4)/.6)*.85;ctx.strokeStyle=state.gold;ctx.lineWidth=1.4;ctx.shadowColor=state.gold;ctx.shadowBlur=12;
+    const route=[{x:.83,y:.22},{x:.91,y:.43},{x:.8,y:.67},{x:.86,y:.81},{x:.61,y:.92},{x:.3,y:.88}];
+    ctx.beginPath();route.forEach((q,i)=>i?ctx.lineTo(q.x*w,q.y*h):ctx.moveTo(q.x*w,q.y*h));ctx.stroke();
+    route.forEach(q=>{ctx.beginPath();ctx.arc(q.x*w,q.y*h,3,0,Math.PI*2);ctx.fillStyle=state.gold;ctx.fill();});ctx.restore();
+    ctx.save();ctx.globalAlpha=(.83-p*.68)*state.light;
+    ctx.drawImage(mist,-w*.15-p*w*.14,-h*.08,w*1.4,h*1.25);
+    ctx.globalAlpha=(.4-p*.3)*state.light;ctx.translate(w,h);ctx.rotate(Math.PI);ctx.drawImage(mist,-w*.15+p*w*.1,-h*.1,w*1.35,h*1.15);ctx.restore();
+    if(p>.05&&p<.95){
+      const scanX=w*(1-p),wash=ctx.createLinearGradient(scanX-36,0,scanX+36,0);
+      wash.addColorStop(0,'rgba(143,225,255,0)');wash.addColorStop(.5,'rgba(143,225,255,.25)');wash.addColorStop(1,'rgba(143,225,255,0)');
+      ctx.fillStyle=wash;ctx.fillRect(scanX-36,0,72,h);
+    }
+  }
+  slider.addEventListener('input',()=>{state.progress=Number(slider.value);render();});
+  slider.addEventListener('change',()=>{window.openai?.setWidgetState?.({modelContent:{progress:state.progress}})?.catch(()=>{});});
+  window.addEventListener('openai:set_globals',event=>{const next=event.detail?.globals?.widgetState?.modelContent;if(Number.isFinite(next?.progress)){state.progress=next.progress;render();}});
+  new ResizeObserver(render).observe(scene);
+  render();
+  if(globalThis.Tweak){const tweak=new Tweak({container:scene,onChange:render});tweak.addSlider(state,'light',{label:'Atmosphere brightness',min:.65,max:1.3,step:.05});tweak.addColorPicker(state,'gold',{label:'Connection accent'});}
+})();
+</script>

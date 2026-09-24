@@ -14,7 +14,7 @@
 
 .connected-hero__copy h1 {
   color: var(--text-heading);
-  font-size: clamp(2.2rem, 4.5vw, 4.3rem);
+  font-size: var(--hero-heading-size);
   line-height: 1.08;
   letter-spacing: -0.035em;
   text-wrap: balance;

@@ -1,7 +1,7 @@
 /* Fire and Emergency Response sector additions using the existing Apexiar design system. */
 .fire-page .fire-hero { min-height: 0; padding: 160px 0 80px; }
 .fire-hero__layout { position: relative; z-index: 1; display: grid; gap: 48px; align-items: center; }
-.fire-hero h1 { color: var(--text-heading); font-size: clamp(2.2rem, 4.5vw, 4.3rem); line-height: 1.1; letter-spacing: -.035em; margin-bottom: 24px; }
+.fire-hero h1 { color: var(--text-heading); font-size: var(--hero-heading-size); line-height: 1.1; letter-spacing: -.035em; margin-bottom: 24px; }
 .fire-hero h1 span { color: var(--accent-light); }
 .fire-eyebrow { color: var(--accent-light); font-size: .72rem; font-weight: 700; line-height: 1.6; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 16px; }
 .fire-lead { color: var(--text); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.8; margin-bottom: 24px; }

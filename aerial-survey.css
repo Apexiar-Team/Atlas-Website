@@ -1,0 +1,48 @@
+/* A decorative cloud-to-survey transition behind thermal evidence and comparison. */
+.aerial-survey {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #16384e;
+}
+.aerial-survey__background { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.aerial-survey__canvas, .aerial-survey__fallback, .aerial-survey__shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+.aerial-survey__canvas { display: block; opacity: 0; }
+.aerial-survey__playback { position: absolute; top: 18px; right: max(20px, calc((100% - 1320px) / 2)); z-index: 2; min-height: 44px; padding: 8px 14px; border: 1px solid #d4a24c80; border-radius: 6px; background: #0b1c2c; color: #f0cd87; font: inherit; font-size: .75rem; cursor: pointer; }
+.aerial-survey__playback[hidden] { display: none; }
+.aerial-survey__playback:hover { background: #183145; border-color: #f0cd87; }
+.aerial-survey__playback:focus-visible { outline: 2px solid #f0cd87; outline-offset: 4px; }
+.aerial-survey--ready .aerial-survey__canvas { opacity: 1; }
+.aerial-survey--ready .aerial-survey__fallback { visibility: hidden; }
+.aerial-survey__fallback {
+  background: radial-gradient(ellipse at 80% 20%, #95c7db99, transparent 48%), radial-gradient(ellipse at 4% 56%, #5889a8b3, transparent 58%), linear-gradient(145deg, #102e44, #315b70 48%, #142f44);
+}
+.aerial-survey__fallback::after {
+  content: '';
+  position: absolute;
+  inset: 15% -20% -15%;
+  background-image: linear-gradient(#83d7f22e 1px, transparent 1px), linear-gradient(90deg, #83d7f22e 1px, transparent 1px);
+  background-size: 44px 44px;
+  transform: perspective(650px) rotateX(35deg) rotateZ(-12deg);
+  mask-image: linear-gradient(transparent, #000 30%, #0008);
+}
+.aerial-survey__shade {
+  background: linear-gradient(180deg, var(--bg) 0%, #06111d55 13%, transparent 38%, #06111d22 65%, var(--bg) 100%), linear-gradient(90deg, #06111d60, transparent 65%);
+}
+.aerial-survey .aerial-section { position: relative; background: transparent; }
+.aerial-survey .section-title { text-shadow: 0 2px 24px #03111ecc; }
+.aerial-survey .aerial-eyebrow { color: #f0cd87; text-shadow: 0 2px 12px #03111e; }
+.aerial-survey .aerial-feature > div { padding: clamp(22px, 3vw, 36px); background: #0b1c2cf2; border: 1px solid #7ccce64d; border-radius: var(--radius-lg); }
+.aerial-survey .aerial-visual { box-shadow: 0 18px 48px #020b1740; }
+.aerial-survey .aerial-detail { color: #d3e0e9; max-width: 650px; text-shadow: 0 2px 14px #03111e; }
+.aerial-survey .aerial-lead { color: #edf5fb; text-shadow: 0 2px 12px #03111e; }
+.aerial-survey .thermal-comparison-section > .container { position: relative; }
+.aerial-survey .thermal-comparison-section :is(.section-title, .aerial-lead, .thermal-comparison__instruction) { text-shadow: 0 1px 4px #03111e, 0 2px 20px #03111ecc; }
+.aerial-survey .thermal-comparison__instruction { color: #edf5fb; }
+.aerial-survey .thermal-comparison figcaption, .aerial-survey .thermal-comparison__status, .aerial-survey .thermal-comparison__notice { color: #d3e0e9; text-shadow: 0 2px 12px #03111e; }
+@media (max-width: 639px) {
+  .aerial-survey__playback { top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aerial-survey__canvas { transition: none; }
+}

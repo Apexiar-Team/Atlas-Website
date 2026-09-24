@@ -1,8 +1,10 @@
 /* Aerial Intelligence additions; no changes to existing page styles. */
 .aerial-page .aerial-hero { min-height: 0; padding: 160px 0 80px; }
 .aerial-hero__layout { position: relative; z-index: 1; display: grid; gap: 48px; align-items: center; }
-.aerial-hero h1 { font-size: clamp(2.2rem, 4.5vw, 4.3rem); line-height: 1.1; letter-spacing: -0.035em; color: var(--text-heading); margin-bottom: 24px; text-wrap: balance; }
-.aerial-hero h1 span { color: var(--accent-light); }
+.aerial-hero__intro { min-width: 0; }
+.aerial-hero h1 { font-size: var(--hero-heading-size); line-height: 1.15; letter-spacing: -0.035em; color: var(--text-heading); margin-bottom: 24px; text-wrap: initial; }
+.aerial-hero h1 span { color: var(--accent-light); font-size: inherit; }
+.aerial-hero h1 em { font-style: italic; }
 .aerial-eyebrow { font-size: 0.72rem; line-height: 1.6; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 16px; }
 .aerial-lead { font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--text); line-height: 1.8; margin-bottom: 24px; }
 .aerial-detail { color: var(--text-muted); line-height: 1.8; margin-bottom: 24px; }
@@ -24,6 +26,24 @@
 .aerial-status-label--development { color: var(--accent-light); }
 .aerial-roadmap { color: var(--text-muted); border-left: 2px solid var(--accent-light); margin-top: 28px; padding: 12px 20px; line-height: 1.8; }
 .aerial-roadmap strong { color: var(--text); }
+/* Bridge the blue security concept into the operational connection section. */
+.aerial-section--platform {
+  position: relative;
+  background: radial-gradient(ellipse at 12% 35%, #12374d45, transparent 55%), radial-gradient(ellipse at 90% 55%, #8b64201a, transparent 55%), var(--bg);
+}
+.aerial-section--platform::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: max(20px, calc((100% - 1320px) / 2));
+  right: max(20px, calc((100% - 1320px) / 2));
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #63ddff55 30%, #d4a24c70 70%, transparent);
+  pointer-events: none;
+}
+.aerial-section--platform .aerial-status-card { background: linear-gradient(145deg, #0b1b29, #101019); border-color: #63ddff40; border-top: 2px solid #63ddff90; }
+.aerial-section--platform .aerial-status-card + .aerial-status-card { background: linear-gradient(145deg, #151923, #181510); border-color: #d4a24c40; border-top-color: #d4a24c; }
+.aerial-section--platform .aerial-roadmap { background: linear-gradient(90deg, #d4a24c0c, transparent); padding: 16px 20px; }
 .aerial-feature, .aerial-connection { display: grid; gap: 40px; align-items: center; }
 .aerial-feature h3 { font-size: 1.5rem; color: var(--text-heading); margin-bottom: 18px; }
 .aerial-applications article { padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); }
@@ -37,8 +57,15 @@
   .aerial-services, .aerial-applications { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (min-width: 1000px) {
-  .aerial-hero__layout, .aerial-feature { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .aerial-feature { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .aerial-connection { grid-template-columns: 1.2fr 1fr; }
+}
+@media (min-width: 62.5em) {
+  /* Reserve space for the full italic line without changing the shared type scale. */
+  .aerial-hero__layout { grid-template-columns: minmax(min-content, 1.4fr) minmax(0, 1fr); gap: 32px; }
+  .aerial-hero h1 { width: max-content; max-width: 100%; }
+  .aerial-hero h1 span { white-space: nowrap; }
+  .aerial-hero__visual img { aspect-ratio: 4 / 3; height: auto; object-fit: cover; object-position: 55% center; }
 }
 @media (max-width: 639px) {
   .aerial-page .container { padding-inline: 20px; }

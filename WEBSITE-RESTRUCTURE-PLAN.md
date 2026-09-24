@@ -1,6 +1,6 @@
 # Apexiar website restructure: control document
 
-Last updated: 23 September 2026.
+Last updated: 24 September 2026.
 
 ## Current position
 
@@ -13,7 +13,7 @@ Last updated: 23 September 2026.
 - This control document and its reference in `AGENTS.md` are subsequent planning changes, not part of that baseline.
 - No content deletion is approved except the explicitly requested inspection-animation skip control. No framework or dependency change is approved.
 - The user's six-phase direction supersedes the earlier eight-phase proposal. In particular, the customer testimonial stays on the homepage.
-- Current bounded refinement: user authorised saving, committing and pushing all 23 September homepage refinements to main. Final 21 tests, JavaScript syntax and whitespace checks passed; fetched origin/main with no divergence before committing. Wider Phase 6 QA remains open; production activation of this new release is not yet verified.
+- Current bounded refinement: User accepted the final cloud flow and authorised saving, committing and pushing all current refinements to main on 24 September. Capabilities, aerial copy/layout, shared hero typography and thermal atmosphere are approved for this release. All 33 tests passed; wider Phase 6 device/accessibility checks remain open.
 
 ## How to use and update this document
 
@@ -68,9 +68,9 @@ Remain within static HTML, shared `styles.css`, shared `script.js` and the exist
 | Homepage | `/` and existing `/index.html` | Accepted for progression; protected content retained |
 | Software & Intelligence | `/software-intelligence.html` | Accepted by user; agent browser/device QA outstanding |
 | Connected Systems | `/connected-systems.html` | Accepted for progression; agent browser/device QA outstanding |
-| Aerial Intelligence | `/aerial-intelligence.html` | Accepted by user; browser/device QA outstanding |
+| Aerial Intelligence | `/aerial-intelligence.html` | Page and final cloud-to-survey background accepted; wider browser/device QA outstanding |
 | Advisory & Deployment | `/advisory-deployment.html` | Accepted by user; browser/device QA outstanding |
-| Capabilities overview | `/capabilities.html` | Accepted by user; browser/device QA outstanding |
+| Capabilities overview | `/capabilities.html` | 24 September dynamic refinement accepted by user; wider device QA outstanding |
 | Rail | `/sectors/rail.html` | Accepted for progression; homepage route connected; browser/device QA pending |
 | Fire & Emergency Response | `/sectors/fire-emergency-response.html` | Accepted by user; homepage route connected; browser/device QA pending |
 | Energy & Infrastructure | `/sectors/energy-infrastructure.html` | Accepted for progression; homepage route connected; browser/device QA pending |
@@ -117,10 +117,14 @@ All rows start as not started unless explicitly retained. Copy destination conte
 | M26 | Six articles and listing | `blog.html`; `/blog/` | Retain under Insights navigation label | Feature selected articles/case studies | Retained; unchanged |
 | M27 | Contact form, email, hours and location | `contact.html` | Retain; inspect actual enquiry routing before source tagging | Final contact CTA | Retained; unchanged |
 | M28 | Privacy, cookies, carbon page/PDF and 404 content | Root HTML and `/assets/` | Retain; track existing defects separately | Footer links | Retained; 404 root-relative recovery links/skip link/noindex corrected; legal text unchanged pending consent reconciliation |
-| M29 | Header/footer links, software company description and metadata | Repeated across HTML pages | Preserve useful software wording on Software page before corporate revision; update consistently in Phase 6 | Complete navigation once destinations exist | All 30 desktop/mobile headers and footers standardised; original footer copy preserved on Software; corporate schema updated; unique titles/descriptions reviewed; 29 canonical routes in sitemap; all 60 Software header links now open the page top (user verified) |
+| M29 | Header/footer links, software company description and metadata | Repeated across HTML pages | Preserve useful software wording on Software page before corporate revision; update consistently in Phase 6 | Complete navigation once destinations exist | All 30 desktop/mobile headers and footers standardised; original footer copy preserved on Software; corporate schema updated; unique titles/descriptions reviewed; 29 canonical routes in sitemap; all 60 Software header links now open the page top (user verified); aerial title and descriptions now target drone inspections, ready for review |
 | M30 | All 69 original assets, including four unreferenced files | `/assets/` | Keep filenames/paths; verify references before any later relocation | Reuse relevant assets | All original assets preserved; supplied RISQS.png copied unchanged from Desktop/website images; 89 assets total |
 | M31 | User-supplied turbine inspection clip | Desktop/website images | Add paused scroll-controlled homepage sequence after operating model; retain source | Additive; no existing section replaced | Approved media retained; separate navy intro, top-aligned footage and requested skip removal implemented. Eight inspection tests passed; revised layout awaits user visual review |
 | M32 | Supplied visible and thermal railway illustrations | Desktop/website images | Add full-frame native comparison after Aerial Intelligence thermal explanation; preserve originals | None; homepage unchanged | Revised pair integrated at neutral exposure; prior images retained; six tests, alignment and Edge desktop/tablet/phone emulation passed; physical touch and remaining accessibility/loading QA open |
+| M33 | Capabilities overview hero, capability cards and operating model | `capabilities.html` | Add linked capability diagram and finite blue/gold motion; preserve existing copy, cards, images and routes | None; homepage unchanged | Ready for manual review; 21 tests and 79 local references passed; desktop/tablet/mobile rendered review assigned to user |
+| M34 | Hero heading font sizes across content pages | Shared and page CSS | One responsive size token; preserve wording, colours, italics and protected content; aerial desktop text column widened for two lines with approved slight image crop | Homepage uses the same scale | Ready for manual review; 21 tests, 2,000 references and 10 localhost stylesheets passed; user owns rendered QA |
+| M35 | Complete Platform and development section, Gen 1/Gen 2 cards and roadmap | aerial-intelligence.html after programme | Move intact after security concept, before wider operational picture; blue/gold transition styling | None; homepage unchanged | Ready for manual review; exact section-content parity, order, 72 references and 21 tests passed |
+| M36 | Thermal and visual evidence / visible-thermal comparison backgrounds | aerial-intelligence.html | Seamless atmosphere; timed terrain reveal and constant-speed cloud flow, Pause/Resume and explicit reduced-motion Play option; lower backgrounds restored | None; homepage unchanged | Final cloud flow accepted by user; commit/push authorised; 33 tests, 74 references and localhost checks passed |
 
 ### Product preservation checklist
 
@@ -152,7 +156,7 @@ Preserve the Atlas image reference initially despite its filename; confirm its c
 | 3d | Capabilities overview | Accepted by user; browser/device QA outstanding | Four working capability routes; page QA and user review |
 | 4 | Homepage | Accepted for progression; browser/device QA outstanding | All capability destinations exist; migration checks pass; particles, testimonial and evidence retained; visual approval |
 | 5 | Sector pages | Accepted for progression; browser/device QA outstanding | Review Rail, Fire & Emergency Response, Energy & Infrastructure individually; only valid underlying links |
-| 6 | Navigation, metadata and QA | Implementation ready for review; automated checks passed; browser/release checks open | Site-wide regression review and final disposition inventory; release approval separate |
+| 6 | Navigation, metadata and QA | Implementation ready for review; automated checks passed; 24 September capabilities refinement accepted; shared hero typography, aerial hero layout and thermal cloud flow accepted for the user-authorised release; wider browser/release checks open | Site-wide regression review and final disposition inventory; release approval separate |
 
 ### Phase 1: protect and prepare
 
@@ -711,3 +715,85 @@ Original Phase 2 task (implemented; visual QA still pending):
 - Changed `script.js`, `homepage.css`, added `tests/home-flow.test.js`, and updated this tracker and `WEBSITE-QA-REPORT.md`; timeline copy, markup, globe/horizon, layout and all protected homepage sections remain unchanged. Sixteen tests, JavaScript syntax, local HTTP resource and Git whitespace checks passed. The user requested manual visual review, so no desktop takeover or rendered browser check was performed. No dependency, commit or deployment.
 - Timing follow-up: slowed the complete neon sequence by 50% at the user's request. Each pulse now lasts 1.2 seconds instead of 0.8 seconds, and the per-step stagger is 0.63 seconds instead of 0.42 seconds. Colour, intensity, order, trigger and final Act state are unchanged. Static checks only, as requested; no commit or deployment.
 - Colour follow-up: replaced the sequence's purple neon and Act's purple resting node with the established Apexiar gold palette (`#ba8b3d`, `#d4a24c`, `#edc67c`, `#f0cd87`). The blue inactive state, 50%-slower timing, order, trigger and reduced-motion behavior are unchanged. Static checks only, as requested; no commit or deployment.
+
+### Capabilities page dynamic refinement ? 24 September 2026
+
+- Bounded to the capabilities overview within Phase 6; M33 added. User requested a more dynamic page and explicitly requested no computer takeover, with visual checking left to them.
+- Added a native HTML/SVG linked capability map alongside the existing introduction, a brief gold signal travelling over blue connections, stronger card hover/focus treatments, and a scroll-triggered sequential highlight through Sense / Connect / Understand / Act. Hero hierarchy and spacing refined; tablet/mobile layouts stack the graphic. New animations settle within five seconds and respect reduced motion. No new script, framework, dependency, asset or service claim.
+- Preserved the user-approved heading and paragraph, all existing capability cards, images, routes, operating-model copy and lower sections. Homepage and shared files unchanged.
+- Checks: all 21 existing Node tests passed; exact preservation of the card grid and subsequent content (apart from the flow reveal class), unique IDs, 79 local links/assets/fragments, current localhost HTML and versioned CSS, and Git whitespace passed. No build/lint scripts configured. No new tests required for presentation-only changes.
+- Deviation: rendered desktop/tablet/mobile, keyboard and reduced-motion visual checks left to the user as explicitly requested; no browser or desktop takeover. Next action: user review of this page; stop at this review gate. No commit, push or deployment.
+- Files: capabilities.html, capabilities.css, WEBSITE-RESTRUCTURE-PLAN.md, WEBSITE-QA-REPORT.md.
+
+### Aerial hero: drone inspections - 24 September 2026
+
+- User selected drone inspections as the search focus. Replaced the hero slogan with "Drone inspections / for critical infrastructure." and aligned the introductory sentence and hero enquiry CTA. Retained Aerial Intelligence as the capability label.
+- Updated page, Open Graph and Twitter titles/descriptions to match. Retained aerial-intelligence.html and its canonical URL, the hero image, all lower-page content, UAV integration and response services. Scope is this page within Phase 6; M29 and phase tracker updated.
+- Google Search Central title-link guidance supports descriptive, aligned titles/headings: https://developers.google.com/search/docs/appearance/title-link . No UK search-volume data was obtained; no ranking, nationwide coverage or credential claims added.
+- Checks: 21 existing Node tests passed; 72 local links/assets/fragments, exact lower-page preservation, one H1 and localhost HTML passed. Git whitespace passed. No build/lint scripts configured. Visual review remains with the user; no computer takeover. Next action: manual hero copy/layout review. No commit/deployment.
+- Files: aerial-intelligence.html and both project records. Earlier capabilities design accepted by user; wider device QA remains open.
+
+### Consistent hero heading sizes - 24 September 2026
+
+- User authorised heading-size consistency across all pages, superseding the earlier aerial two-line fit. Added --hero-heading-size in styles.css: clamp(2rem, 4.5vw, 3.8rem). All content-page hero styles now use this token; gold/italic accent lines inherit the full size. Removed aerial container-based sizing. Headings wrap naturally rather than shrinking to preserve two lines. The 404 utility heading remains separate from page heroes.
+- Preserved all HTML, copy, metadata, imagery, animations, links, heading weights, colours and italics. Homepage protected content is unchanged; only its heading size rule changes. No dependencies.
+- Checks: 21 Node tests passed; 30 pages / 2,000 local links, assets and fragments passed; all 10 changed CSS files served byte-for-byte by localhost; Git whitespace passed. Shared token statically resolves to 32px at 390px, 34.56px at 768px and 60.8px at 1440px with a 16px root. This is not rendered layout verification. No build/lint scripts configured.
+- User explicitly owns manual desktop/tablet/mobile checks; no browser or computer takeover. Next action: review consistent sizing and natural line wrapping, especially long aerial and capabilities headings. Stop at typography review gate; no commit/deployment.
+- Files: styles.css, homepage.css, capabilities.css, aerial-intelligence.css, advisory-deployment.css, connected-systems.css, software-intelligence.css, sectors/rail.css, sectors/fire-emergency-response.css, sectors/energy-infrastructure.css, and both project records.
+
+### Aerial hero two-line layout - 24 September 2026
+
+- User requested two heading lines while retaining the shared font size, and authorised slightly cropping the hero image. Desktop grid now reserves the intrinsic width of the italic second line, uses a wider text column and reduces the gap to 32px. The second line stays unbroken on desktop. Image uses a 4:3 display crop with object-fit, preserving the original source and caption. Smaller screens keep stacked layout and natural wrapping; shared typography unchanged.
+- Changed aerial-intelligence.css, its versioned link in aerial-intelligence.html, and both project records; M34 and Phase 6 tracker updated. 21 existing tests, 72 local references, localhost HTML/CSS and Git whitespace passed. No configured build/lint scripts.
+- No computer takeover; rendered desktop/tablet/mobile checks remain with the user. Next action: manual review of two-line desktop fit and image framing. No commit or deployment.
+
+### Aerial platform section relocation - 24 September 2026
+
+- User authorised moving the complete Platform and development section between Security intelligence / Concept and Part of the wider operational picture, with creative colour adjustments. Destination inserted before source removal. Preserved every section, all copy, both generation/status cards, roadmap, headings, IDs, images and links. M35 added; Phase 6 tracker updated.
+- Added restrained blue/gold radial lighting, complementary blue Gen 1 and gold Gen 2 card accents, roadmap backing and a thin gradient separator into the next section. Removed the early programme section navy tint so its new adjacency to the navy applications section remains distinct. New styles are scoped to the moved section; responsive grid unchanged.
+- Files: aerial-intelligence.html, aerial-intelligence.css, WEBSITE-RESTRUCTURE-PLAN.md and WEBSITE-QA-REPORT.md. Versioned page CSS URL updated. Checks passed: complete section HTML parity ignoring only section styling classes, destination order, single platform ID, 72 local references/fragments, localhost HTML/CSS, all 21 tests and Git whitespace. No build/lint scripts configured.
+- User owns rendered desktop/tablet/mobile review; no computer takeover. Next action: manual review of section order and colour transition. Stop at this page review gate; no commit or deployment.
+
+### Approved cloud-to-survey background - 24 September 2026
+
+- User approved implementing the proposed background on the aerial page. Wrapped the Platform and development and wider operational picture sections in one decorative atmosphere; existing sections remain in the approved order. Added a brighter blue-grey cloud field that clears with normal scrolling to reveal perspective terrain contours, survey points, a gold connection path and subtle turbine/pylon outlines. No scroll pinning or forced scroll travel.
+- Original section markup/content preserved exactly except the added class on the connection section. Foreground cards and related links use solid navy surfaces; text remains live HTML. All original images, paths, metadata, canonical URL, thermal comparison and protected homepage content retained. New layers are hidden from assistive technology and do not intercept pointer input.
+- Implementation: page-scoped aerial-survey.css and aerial-survey.js, no framework, third-party library or production dependency. Canvas textures are cached, backing stores capped near 1.8 million pixels and frames scheduled only on input. Offscreen/hidden/page-exit rendering suspends. Reduced-motion visitors receive a static scene, including live preference changes; missing/failed canvas falls back to a CSS atmosphere and grid.
+- Design deviation: existing repository imagery is labelled illustrative and there is no verified aerial terrain/survey dataset for this backdrop. Used a deliberately illustrative relief surface and infrastructure outlines instead of presenting invented geometry as a real survey or sourcing unrelated photography. The approved Huly-inspired cloud-to-digital transition and Apexiar colours are retained. No live telemetry or additional capability claims.
+- Checks: all 27 Node tests passed (six new animation lifecycle tests), new JavaScript syntax passed, exact section/content/order preservation passed, IDs unique, 74 local links/assets/fragments passed, all four localhost HTML/CSS/JS responses matched files, and Git whitespace passed. Tests include desktop/tablet/tall-mobile canvas geometry and pixel budget, reverse/clamped scrolling, frame coalescing, reduced motion, missing IntersectionObserver, hidden/offscreen/BFCache lifecycle and canvas failure/recovery. No build/lint scripts configured.
+- Files: aerial-intelligence.html, aerial-survey.css, aerial-survey.js, tests/aerial-survey.test.js, WEBSITE-RESTRUCTURE-PLAN.md and WEBSITE-QA-REPORT.md. Existing concept preview retained. Temporary preservation snapshots removed after comparison.
+- User explicitly owns rendered desktop/tablet/mobile review; no browser or computer takeover. Automated geometry/lifecycle checks are not rendered layout or performance validation. Next action: manual review of cloud brightness, scroll reveal and text contrast. Stop at this page review gate; no commit, push or deployment.
+
+### Cloud-to-survey destination correction - 24 September 2026
+
+- User liked the effect but clarified that the screenshot identified Thermal and visual evidence / Add another view of the situation plus Reveal a different perspective (thermal comparison). Earlier placement at Platform and development was an assistant interpretation error. M36 and current tracker corrected.
+- Moved the single atmosphere wrapper/canvas around exactly those two thermal sections, leaving all sections/content in their existing order. Removed the lower wrapper and restored original Platform and development / wider operational picture styling. Adapted the foreground CSS to support thermal copy and comparison instructions over the brighter scene, with an opaque navy copy panel and subtle text backing. Thermal images, full-frame comparison, slider controls, labels, script and source assets are unchanged; survey animation script is unchanged.
+- Changed aerial-intelligence.html, aerial-survey.css and both project records. CSS cache version incremented. Checks passed: exact section-content/order parity, wrapper contains thermal-heading and comparison-heading only, one survey wrapper, 27 tests, 74 local references, localhost HTML/CSS and Git whitespace. No build/lint scripts configured.
+- User owns rendered desktop/tablet/mobile review; no computer takeover. Next action: manual review of corrected placement, background visibility and foreground contrast. No commit or deployment.
+
+### Seamless survey background and entrance motion - 24 September 2026
+
+- User identified a hard horizontal split before Reveal a different perspective, and requested clouds flowing when scrolling onto the section rather than following every scroll movement. Removed the comparison section full-width dark pseudo-element that created the seam; retained shared atmosphere and strengthened local text shadows for legibility. No copy, image, slider, route or layout change.
+- Replaced scroll-derived progress with one 4.8-second entrance reveal. It starts when the section enters the viewport, continues while the user holds their scroll position, then stops on the digital terrain. Scroll direction/distance cannot scrub or restart it. Offscreen/hidden/page-exit states pause elapsed time; resuming continues the same reveal. Reduced-motion preference renders the final static composition, including live changes. Canvas failure/static fallback, cached layers and pixel cap retained. Missing IntersectionObserver uses scroll only for visibility detection.
+- Changed aerial-survey.css, aerial-survey.js, versioned resource links in aerial-intelligence.html, tests/aerial-survey.test.js and both project records. M36/Phase 6 updated. Checks: all 29 tests passed; JavaScript syntax, corrected wrapper membership, removed shading strip, unique IDs, 74 local references, localhost HTML/CSS/JS and Git whitespace passed. Tests now verify timed no-scroll playback, scroll independence, no replay, pause/resume, reduced motion, resize budgets and fallback/recovery. No build/lint scripts configured.
+- User owns rendered desktop/tablet/mobile review; no computer takeover. Next action: review seamless background and entrance timing on localhost. No commit or deployment.
+
+### Continuing cloud motion - 24 September 2026
+
+- User reported the clouds no longer flowed after the previous timed reveal. Kept the 4.8-second terrain entrance and added an independent ambient clock so two cloud layers continue gently drifting while the section is visible, even without scrolling. Increased residual cloud opacity so their movement remains visible over the revealed survey. Retained seamless background; no section, copy, image or comparison change.
+- Added native Pause clouds / Resume clouds control with a 44px touch target and visible focus. Hidden before successful enhancement and when reduced motion is preferred or canvas fails. User pause survives resizing, section exit/re-entry and motion preference changes. Offscreen, hidden tab, page exit and canvas loss suspend rendering and elapsed motion; resumption does not jump through hidden time. Reused cached layers and capped painting near 30fps while retaining the pixel budget.
+- Changed aerial-survey.js/css, aerial-intelligence.html (control and resource versions), tests/aerial-survey.test.js and both records. M36/Phase 6 updated. All 31 tests, new JS syntax, playback markup, 74 local references, current localhost HTML/CSS/JS and Git whitespace passed. Tests cover continuing post-reveal cloud positions, stable completed terrain, pause/resume persistence, no hidden-time jump, high-refresh frame throttling and existing lifecycle/fallback behavior. No build/lint scripts configured.
+- User manual desktop/tablet/mobile review remains pending; no computer takeover. Next action: refresh and review continuous cloud flow and pause control. No commit or deployment.
+
+### Static cloud flow follow-up - 24 September 2026
+
+- User still reports static clouds. Localhost serves the current HTML/CSS/JS byte-for-byte; the specific browser cause has not been confirmed. Found two relevant code paths: reduced motion deliberately froze the scene and hid the playback control, and sinusoidal ambient movement slowed to zero at each turning point. Do not treat automated tests as confirmation of the user's rendered result.
+- Replaced reversing movement with two constant-speed, horizontally seamless cloud bands at different rates. Increased residual cloud visibility and retained the entrance terrain reveal, shared background, texture caching, 30fps paint limit, pixel budget and hidden/offscreen suspension. Reduced motion stays static by default but exposes Play clouds as an explicit opt-in; live preference changes cancel that opt-in. Pause/resume retains its existing behavior. No content, imagery, comparison behavior or layout change.
+- Changed aerial-survey.js, its versioned link in aerial-intelligence.html, tests/aerial-survey.test.js and both project records. All 33 tests passed, including constant movement and viewport coverage over two cloud loops, explicit reduced-motion play/pause, simulated desktop/tablet/mobile canvas sizing, and existing lifecycle/slider tests. JavaScript syntax, 74 local links/assets/fragments, unique IDs, three localhost byte comparisons and Git whitespace passed. No configured build/lint commands.
+- User retains rendered desktop/tablet/mobile review; no computer takeover in this follow-up. Next action: reload the aerial page, confirm visible flow while holding scroll position, and use Play clouds if the system requests reduced motion. Await manual confirmation at this page review gate. No commit or deployment.
+
+### End-of-day release - 24 September 2026
+
+- User accepted the final cloud motion ("perfect") and explicitly requested save, commit and push to main. Included all current session changes: capabilities presentation/copy, shared hero typography, aerial inspection copy/layout and section order, seamless flowing thermal background and controls, regression tests, retained concept preview and project records.
+- Release checks: current implementation has 33 passing Node tests, 74 aerial references/fragments, JavaScript syntax and localhost resource equality. No implementation changes since that test run. No build/lint commands configured. Fresh origin fetch confirmed main has zero divergence before commit. User accepted their visual review; wider physical-device/Safari/accessibility checks remain open.
+- Next action: commit this reviewed change set and push main without force; verify the remote commit and clean worktree. Production activation is not yet verified.

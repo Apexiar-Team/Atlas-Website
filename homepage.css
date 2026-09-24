@@ -13,7 +13,7 @@
 @keyframes home-brand-arrive { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes home-brand-shine { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
 .home-eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #a5c0d0; margin-bottom: 18px; line-height: 1.7; }
-.home-hero h1 { color: #f4f6f7; font-size: clamp(2.35rem, 3.6vw, 3.8rem); line-height: 1.07; letter-spacing: -.03em; text-transform: uppercase; font-weight: 800; margin: 0 0 24px; text-wrap: balance; }
+.home-hero h1 { color: #f4f6f7; font-size: var(--hero-heading-size); line-height: 1.07; letter-spacing: -.03em; text-transform: uppercase; font-weight: 800; margin: 0 0 24px; text-wrap: balance; }
 .home-hero h1 span { color: #dfb669; }
 .home-lead { font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.65; max-width: 590px; color: #d7e2e9; margin-bottom: 30px; }
 .home-page .hero__cta-group { justify-content: flex-start; gap: 14px; }
@@ -117,7 +117,7 @@
   .home-hero__art { top: auto; height: 255px; width: 100%; opacity: .85; }
   .home-hero__art::after { background: linear-gradient(180deg, #030c14, transparent 25%, transparent 80%, #030c14); }
   .home-hero__caption { font-size: .5rem; right: 20px; }
-  .home-hero h1 { font-size: clamp(2rem, 8.5vw, 3rem); }
+  .home-hero h1 { font-size: var(--hero-heading-size); }
   .home-page .btn { white-space: normal; text-align: center; }
   .home-sector-strip .container { flex-direction: column; gap: 14px; }
   .home-sector-strip a + a { border-left: 0; }

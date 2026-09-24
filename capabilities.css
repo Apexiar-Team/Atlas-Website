@@ -1,7 +1,7 @@
 /* Capability overview; scoped additions to the existing design system. */
 .capabilities-page .capabilities-hero { min-height: 0; padding: 160px 0 72px; }
 .capabilities-hero__content { position: relative; z-index: 1; }
-.capabilities-hero h1 { color: var(--text-heading); font-size: clamp(2.4rem, 5.5vw, 5rem); line-height: 1.08; letter-spacing: -0.04em; margin-bottom: 26px; }
+.capabilities-hero h1 { color: var(--text-heading); font-size: var(--hero-heading-size); line-height: 1.08; letter-spacing: -0.04em; margin-bottom: 26px; }
 .capabilities-hero h1 span { color: var(--accent-light); }
 .capabilities-eyebrow { color: var(--accent-light); text-transform: uppercase; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; line-height: 1.6; margin-bottom: 16px; }
 .capabilities-lead { max-width: 790px; font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.8; margin-bottom: 30px; }
@@ -47,6 +47,86 @@
   .capabilities-section { padding: 56px 0; }
   .capability-card__body { padding: 22px; }
   .capabilities-page .btn { white-space: normal; text-align: center; }
+}
+/* Interactive overview, scoped to this page. Motion settles within five seconds. */
+.capabilities-hero h1 span { font-size: inherit; }
+.capabilities-hero__overview { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; margin-top: 36px; }
+.capabilities-hero__intro { min-width: 0; }
+.capabilities-hero__intro .capabilities-lead { font-size: clamp(1rem, 1.4vw, 1.15rem); }
+.capabilities-hero__intro .hero__cta-group { flex-wrap: wrap; }
+.capability-network { position: relative; aspect-ratio: 480 / 320; isolation: isolate; background: radial-gradient(ellipse at center, #11334980, transparent 68%); }
+.capability-network__caption { position: absolute; top: 0; width: 100%; text-align: center; color: #a9becd; font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; }
+.capability-network__wires { position: absolute; inset: 12.5% 0 0; width: 100%; height: 87.5%; overflow: visible; pointer-events: none; }
+.capability-network__orbit { stroke: #63ddff26; stroke-dasharray: 2 8; }
+.capability-network__track { stroke: #63ddff50; stroke-width: 1; }
+.capability-network__signal { stroke: #edc67c; stroke-width: 2; stroke-dasharray: 24 520; stroke-dashoffset: 544; opacity: 0; animation: capability-signal 4.6s ease-out .2s; }
+.capability-network__ring { fill: #081a28; stroke: #d4a24c80; filter: drop-shadow(0 0 10px #63ddff30); }
+.capability-network__core { position: absolute; top: 56.25%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #b9d8e5; font-size: clamp(.6rem, 1vw, .75rem); line-height: 1.45; pointer-events: none; }
+.capability-network__core span { display: block; font-size: .6rem; letter-spacing: .14em; color: #edc67c; margin-bottom: 4px; }
+.capability-network__node { position: absolute; width: 36%; padding: 14px 16px; background: linear-gradient(125deg, #0c2233, #07111e); border: 1px solid #63ddff40; border-radius: 10px; color: #f6feff; font-size: clamp(.75rem, 1.15vw, .95rem); font-weight: 600; line-height: 1.35; box-shadow: 0 12px 24px #0004; transition: border-color .25s, box-shadow .25s, transform .25s; }
+.capability-network__node:nth-of-type(1) { left: 0; top: 17%; }
+.capability-network__node:nth-of-type(2) { right: 0; top: 17%; }
+.capability-network__node:nth-of-type(3) { left: 0; bottom: 0; }
+.capability-network__node:nth-of-type(4) { right: 0; bottom: 0; }
+.capability-network__node > span { display: block; color: #87b6ce; font-size: .55rem; letter-spacing: .08em; margin-bottom: 8px; }
+.capability-network__node b { position: absolute; right: 12px; bottom: 12px; color: #d4a24c; font-weight: 400; }
+.capability-network__node:is(:hover, :focus-visible) { border-color: #d4a24c; box-shadow: 0 0 28px #d4a24c22; transform: translateY(-3px); }
+.capability-network:focus-within .capability-network__track { stroke: #d4a24c; }
+.capabilities-sectors { margin-top: 36px; }
+.capabilities-page #capability-grid { padding-top: 48px; }
+.capability-card { position: relative; transition: border-color .3s, box-shadow .3s; }
+.capability-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(135deg, #63ddff0d, transparent 40%, #d4a24c0d); }
+.capability-card:focus-within { border-color: #d4a24c; box-shadow: 0 12px 40px #0006, 0 0 24px #d4a24c15; }
+.capability-card__image img { transition: transform .65s ease; }
+.capability-card__cta { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.capability-card__cta span { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #d4a24c60; border-radius: 50%; transition: background .25s, color .25s, transform .25s; }
+.capability-card:focus-within .capability-card__cta span { background: #d4a24c; color: #07111e; transform: rotate(-35deg); }
+.capabilities-flow { gap: 20px; }
+.capabilities-flow li { position: relative; padding: 28px 22px 24px; border: 1px solid #63ddff26; border-radius: 12px; background: linear-gradient(150deg, #0b2232, #070e19); transition: border-color .3s, box-shadow .3s; }
+.capabilities-flow li::before { content: ''; position: absolute; top: -1px; left: 22px; right: 22px; height: 2px; background: #63ddff70; transform-origin: left; }
+.capabilities-flow li .capability-number { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid #63ddff55; border-radius: 50%; background: #06101e; }
+.capabilities-flow.visible li::before { animation: capability-flow 1.3s ease both; }
+.capabilities-flow.visible li:nth-child(2)::before { animation-delay: .8s; }
+.capabilities-flow.visible li:nth-child(3)::before { animation-delay: 1.6s; }
+.capabilities-flow.visible li:nth-child(4)::before { animation-delay: 2.4s; }
+.capabilities-flow li:focus-within { border-color: #d4a24c90; box-shadow: 0 0 28px #d4a24c12; }
+.capabilities-links a { transition: background .25s, border-color .25s; }
+.capabilities-links a span { transition: transform .25s; }
+.capabilities-links a:is(:hover, :focus-visible) { border-color: #d4a24c; background: #102132; }
+.capabilities-links a:is(:hover, :focus-visible) span { transform: translateX(4px); }
+@keyframes capability-signal {
+  0% { opacity: 0; stroke-dashoffset: 544; }
+  15%, 80% { opacity: 1; }
+  100% { opacity: 0; stroke-dashoffset: 0; }
+}
+@keyframes capability-flow {
+  0% { transform: scaleX(0); background: #edc67c; box-shadow: 0 0 12px #d4a24c; }
+  65% { transform: scaleX(1); background: #edc67c; box-shadow: 0 0 12px #d4a24c; }
+  100% { transform: scaleX(1); background: #d4a24c90; box-shadow: none; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .capability-network:hover .capability-network__track { stroke: #d4a24c; }
+  .capability-card:hover { border-color: #d4a24c; box-shadow: 0 12px 40px #0006, 0 0 24px #d4a24c15; }
+  .capability-card:hover .capability-card__image img { transform: scale(1.025); }
+  .capability-card:hover .capability-card__cta span { background: #d4a24c; color: #07111e; transform: rotate(-35deg); }
+  .capabilities-flow li:hover { border-color: #d4a24c90; box-shadow: 0 0 28px #d4a24c12; }
+}
+@media (max-width: 999px) {
+  .capabilities-hero__overview { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .capability-network { width: 100%; max-width: 520px; justify-self: center; }
+  .capability-network__node { font-size: .9rem; }
+  .capability-network__core { font-size: .75rem; }
+}
+@media (max-width: 479px) {
+  .capabilities-hero h1 { font-size: var(--hero-heading-size); overflow-wrap: break-word; }
+  .capability-network { aspect-ratio: 480 / 390; }
+  .capability-network__wires { inset: 18% 0 0; height: 82%; }
+  .capability-network__core { top: 59%; font-size: .58rem; }
+  .capability-network__core span { font-size: .5rem; }
+  .capability-network__node { width: 39%; padding: 12px 9px; font-size: .72rem; }
+  .capability-network__node > span { font-size: .48rem; letter-spacing: .03em; }
+  .capability-network__node b { right: 7px; bottom: 8px; }
+  .capability-network__caption { font-size: .56rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html:has(.capabilities-page) { scroll-behavior: auto; }
