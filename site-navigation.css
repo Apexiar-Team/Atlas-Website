@@ -16,8 +16,11 @@
 .mobile-nav .capability-nav summary { font-size: 1.3rem; justify-content: center; }
 .mobile-nav .capability-nav__panel { position: static; width: 100%; margin-top: 14px; box-sizing: border-box; box-shadow: none; }
 .mobile-nav .capability-nav__panel a { display: block; padding: 10px; font-size: .95rem; line-height: 1.5; }
-.mobile-nav { overflow-y: auto; }
-.mobile-nav__links { padding-block: 24px; }
+.mobile-nav { overflow-y: auto; align-items: flex-start; padding: 96px 24px 32px; }
+.mobile-nav__links { padding-block: 24px; margin-block: auto; min-width: 0; max-width: 100%; }
+.mobile-nav .mobile-nav__actions { max-width: 100%; }
+.mobile-nav .mobile-nav__actions .btn--primary { color: var(--bg); background-image: linear-gradient(135deg, var(--accent-light), var(--gold-bright)); max-width: 100%; white-space: normal; text-align: center; justify-content: center; }
+.mobile-nav .mobile-nav__actions .btn--primary::after { content: none; }
 .video-reel__playback { position: absolute; top: 18px; right: 20px; z-index: 5; padding: 10px 16px; color: #f1d397; background: #06101e; border: 1px solid #d4a24c; border-radius: 6px; cursor: pointer; font: inherit; font-size: .8rem; }
 .video-reel__playback:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
 .navbar__actions .btn { white-space: normal; text-align: center; }

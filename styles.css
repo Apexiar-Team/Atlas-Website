@@ -130,9 +130,9 @@ img { max-width: 100%; }
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--gold-deep), var(--accent), var(--gold-copper), var(--gold-bright));
+  background: linear-gradient(135deg, var(--accent-light), var(--gold-bright));
   background-size: 300% 100%;
-  color: #fff;
+  color: var(--bg);
   padding: 10px 24px;
   box-shadow: 0 2px 16px rgba(184,134,11,0.4);
   animation: shimmer 8s ease-in-out infinite;
@@ -141,7 +141,7 @@ img { max-width: 100%; }
 }
 
 .btn--primary::after {
-  content: '';
+  content: none;
   position: absolute;
   top: -50%;
   left: -60%;
@@ -346,12 +346,14 @@ img { max-width: 100%; }
   align-items: center;
   justify-content: center;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
 .mobile-nav.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: all;
 }
 
@@ -2595,6 +2597,21 @@ img { max-width: 100%; }
   }
 }
 
+@media (max-width: 639px) {
+  .footer__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer__brand,
+  .footer__links {
+    min-width: 0;
+  }
+
+  .footer__links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .footer__brand {
   display: flex;
   align-items: center;
@@ -3187,7 +3204,13 @@ img { max-width: 100%; }
   margin: 0 auto;
 }
 
-@media (min-width: 640px) {
+@media (max-width: 359px) {
+  .about__stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
   .about__stats {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -3235,7 +3258,7 @@ img { max-width: 100%; }
 .expertise {
   padding: 96px 0 340px;
   position: relative;
-  overflow: visible;
+  overflow-x: clip;
   background:
     radial-gradient(ellipse 70% 40% at 50% 0%, rgba(44,185,255,0.13) 0%, transparent 55%),
     linear-gradient(180deg, #06101e 0%, #050d1a 60%, #070f1d 100%);
@@ -3693,6 +3716,12 @@ img { max-width: 100%; }
   }
 }
 
+@media (max-width: 435px) {
+  .expertise__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* --- Blog Page --- */
 .blog-hero {
   padding: 160px 0 60px;
@@ -4073,7 +4102,7 @@ a.blog-card {
 }
 
 .prism-officers-title {
-  white-space: nowrap;
+  white-space: normal;
   text-align: center;
 }
 

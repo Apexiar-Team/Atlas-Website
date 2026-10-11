@@ -88,6 +88,8 @@
 
   .software-page .showcase-bento__card {
     min-height: 260px;
+    min-width: 0;
+    aspect-ratio: auto;
   }
 
   .software-intro .btn {
